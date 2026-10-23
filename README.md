@@ -1,6 +1,6 @@
 # Rolli open-source component materials
 
-This repository provides the source, notices, and release-specific relinking materials for the RAW components used by Rolli / pica cam. The application source repository remains private. Proprietary application source, Git history, user photographs, signing credentials, and provisioning profiles are not included.
+This repository provides the source and notices for the RAW components used by Rolli / pica cam, and an index of release-specific relinking materials available on request. The application source repository remains private. Proprietary application source, Git history, user photographs, signing credentials, and provisioning profiles are not included.
 
 ## Component source
 
@@ -10,11 +10,11 @@ RawSpeed is retained in the application. These materials do not disable it or re
 
 ## Relinking materials
 
-See the [build index](RELEASES.md) for the matching kit and checksums. Each kit supplies the complete application link-object set described in its provenance, a compatible source-built RawSpeed library pair, and a relocatable command for linking a modified compatible library. The proprietary application's source is not needed for this procedure. The object-code permissions are stated in each kit's `OBJECT-LICENSE.txt`.
+See the [build index](RELEASES.md) for the matching kit identity and checksums. The two application relinking archives formerly attached to GitHub Releases are no longer offered as public downloads. Recipients can [request the corresponding kit](https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new). Each retained kit supplies the complete application link-object set described in its provenance, a compatible source-built RawSpeed library pair, and a relocatable command for linking a modified compatible library. The proprietary application's source is not needed for this procedure. The object-code permissions are stated in each kit's `OBJECT-LICENSE.txt`.
 
 The 1.9.31 (62) kit reconstructs link objects from the retained release source and configuration. It is explicitly not a claim that the original build objects or the original signed executable have been reproduced byte-for-byte. The current development snapshot is a separate, unreleased entry, even where the application version fields still read 1.9.31 (62).
 
-Public kits contain newly source-built RawSpeed archives. Their hashes are distinguished from the production archives. Earlier written offers, including the offer to supply exact prebuilt libraries used in an earlier build, remain in force. Those original archives have been retained separately and can be requested through the channel below.
+The retained kits contain newly source-built RawSpeed archives. Their hashes are distinguished from the production archives. Earlier written offers, including the offer to supply exact prebuilt libraries used in an earlier build, remain in force. Those original archives have been retained separately and can be requested through the channel below.
 
 Relinking validation produces an unsigned arm64 iPhoneOS Mach-O executable. It does not establish installation or execution on an iPhone, or supply Apple signing credentials. Follow the kit's toolchain and compatibility requirements; a library change must preserve the interface expected by the application objects.
 

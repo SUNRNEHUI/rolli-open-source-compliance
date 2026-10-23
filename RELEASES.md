@@ -2,7 +2,7 @@
 
 ## 1.9.31 (62), distributed build — reconstructed relinking materials
 
-- [Download the kit and checksum](https://github.com/SUNRNEHUI/rolli-open-source-compliance/releases/tag/app-1.9.31-62-reconstructed)
+- [Request this retained kit](https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new); the application object archive is no longer a public Release download.
 - File: `rolli-1.9.31-62-iphoneos-arm64-relink.tar.gz`
 - SHA-256: `fa56ced9e5a5fcb677a9f280c9355a9009374a5f6924b1037fe512ddb3b8318f`
 - Size: 17,553,825 bytes; 278 arm64 iPhoneOS application link objects.
@@ -16,7 +16,7 @@ Baseline relinking with the historical libraries matches the original release's 
 ## Current development snapshot — 2026-10-23, unreleased
 
 - Snapshot: `current-unreleased-link-snapshot-827aad35ff2a368f`.
-- [Download the snapshot kit and checksum](https://github.com/SUNRNEHUI/rolli-open-source-compliance/releases/tag/current-unreleased-20261023)
+- [Request this retained snapshot kit](https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new); the application object archive is no longer a public Release download.
 - File: `rolli-current-unreleased-20261023-iphoneos-arm64-relink.tar.gz`
 - SHA-256: `6541f7e1dd22809ef9b69c065d8c133f7ee751df178184fa8753725e86ff404d`
 - Size: 17,400,340 bytes; 276 arm64 iPhoneOS application link objects.

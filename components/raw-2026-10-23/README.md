@@ -7,11 +7,11 @@ metadata, the seven RawSpeed patches, and pugixml. The app repository, app
 sources, images, account data, build archives and Git history are excluded.
 
 This repository contains component source, not the App's proprietary source.
-The release index identifies which App version uses this snapshot and links to
-its separate relink kit. That kit supplies proprietary App object code and
-linking instructions so recipients can substitute a modified RawSpeed library
-without receiving the App source. A source build alone is not a substitute for
-the release-specific relink kit.
+The release index identifies which App version uses this snapshot and how to
+request its separate relink kit. That retained kit supplies proprietary App
+object code and linking instructions so recipients can substitute a modified
+RawSpeed library without receiving the App source. A source build alone is not
+a substitute for the release-specific relink kit.
 
 ## Components and versions
 
@@ -81,8 +81,8 @@ The `PerfLogging.hpp` in this package is a standalone-only shim that disables
 two diagnostic timing logs while permitting the modified LibRaw files to
 compile outside the App. It is not the App's original header and does not
 represent the released binary. The proprietary App object code needed for
-relinking is supplied in a separate release-specific relink kit; its source
-remains private. The public source build entry builds the two RawSpeed
+relinking is supplied on request in a separate release-specific relink kit;
+its source remains private. The public source build entry builds the two RawSpeed
 archives. It does not build or relink the App.
 
 The component source build was checked on macOS with Xcode 26.6 and CMake

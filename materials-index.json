@@ -13,7 +13,8 @@
       "sha256": "fa56ced9e5a5fcb677a9f280c9355a9009374a5f6924b1037fe512ddb3b8318f",
       "bytes": 17553825,
       "object_count": 278,
-      "device_execution_verified": false
+      "device_execution_verified": false,
+      "availability": "on-request"
     },
     {
       "kind": "current-unreleased-snapshot",
@@ -29,7 +30,8 @@
       "bytes": 17400340,
       "object_count": 276,
       "archive_executable_sha256": "16c55bb01f76325553d5a23758b15312ebbbea5182f677225849d7886333365c",
-      "device_execution_verified": false
+      "device_execution_verified": false,
+      "availability": "on-request"
     }
   ]
 }
