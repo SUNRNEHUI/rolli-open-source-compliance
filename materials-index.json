@@ -33,5 +33,9 @@
       "device_execution_verified": false,
       "availability": "on-request"
     }
-  ]
+  ],
+  "materials_request": {
+    "primary_email": "xihuan666sun@gmail.com",
+    "alternate_issues_url": "https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new"
+  }
 }
