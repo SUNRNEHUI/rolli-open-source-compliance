@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "component_snapshot": "components/raw-2026-10-23",
+  "component_manifest_sha256": "b7d8d580db7005d7e9b4e249f31b40e4ae00664dc81f1f503857c382eab5825b",
+  "entries": [
+    {
+      "app_version": "1.9.31",
+      "app_build": "62",
+      "kind": "distributed-build-reconstructed-objects",
+      "platform": "iphoneos-arm64",
+      "release_tag": "app-1.9.31-62-reconstructed",
+      "file": "rolli-1.9.31-62-iphoneos-arm64-relink.tar.gz",
+      "sha256": "fa56ced9e5a5fcb677a9f280c9355a9009374a5f6924b1037fe512ddb3b8318f",
+      "bytes": 17553825,
+      "object_count": 278,
+      "device_execution_verified": false
+    }
+  ]
+}

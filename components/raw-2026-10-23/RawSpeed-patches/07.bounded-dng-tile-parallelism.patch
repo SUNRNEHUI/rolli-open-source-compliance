@@ -1,0 +1,465 @@
+diff --git a/src/librawspeed/common/RawspeedException.h b/src/librawspeed/common/RawspeedException.h
+index a9f503a7..b0a31e89 100644
+--- a/src/librawspeed/common/RawspeedException.h
++++ b/src/librawspeed/common/RawspeedException.h
+@@ -45,11 +45,11 @@ template <typename T>
+     "Don't have thread-local-storage! Exception text may be garbled if used multithreaded"
+   static char buf[bufSize];
+ #endif
+-#if 0
+   va_list val;
+   va_start(val, fmt);
+   vsnprintf(buf.data(), sizeof(buf), fmt, val);
+   va_end(val);
++#if 0
+   writeLog(DEBUG_PRIO_EXTRA, "EXCEPTION: %s", buf.data());
+ #endif
+   throw T(buf.data());
+diff --git a/src/librawspeed/decoders/DngDecoder.cpp b/src/librawspeed/decoders/DngDecoder.cpp
+index 7fd7ae3e..ca24dbcf 100644
+--- a/src/librawspeed/decoders/DngDecoder.cpp
++++ b/src/librawspeed/decoders/DngDecoder.cpp
+@@ -287,7 +287,7 @@ void DngDecoder::decodeData(const TiffIFD* raw, uint32_t sample_format) {
+   }
+
+   AbstractDngDecompressor slices(mRaw, getTilingDescription(raw), compression,
+-                                 mFixLjpeg, bps, predictor);
++                                 mFixLjpeg, bps, predictor, dngTileWorkers);
+
+   slices.slices.reserve(slices.dsc.numTiles);
+
+@@ -328,7 +328,9 @@ void DngDecoder::decodeData(const TiffIFD* raw, uint32_t sample_format) {
+
+   mRaw->createData();
+
+-  slices.decompress();
++  const auto metrics = slices.decompress();
++  dngTileWorkersUsed = metrics.workersUsed;
++  dngTilesCompleted = static_cast<uint32_t>(metrics.jobsCompleted);
+ }
+
+ RawImage DngDecoder::decodeRawInternal() {
+diff --git a/src/librawspeed/decoders/RawDecoder.h b/src/librawspeed/decoders/RawDecoder.h
+index 241fea2d..23925a62 100644
+--- a/src/librawspeed/decoders/RawDecoder.h
++++ b/src/librawspeed/decoders/RawDecoder.h
+@@ -101,6 +101,11 @@ public:
+   /* Should Fuji images be rotated? */
+   bool fujiRotate;
+
++  // Per-decoder DNG lossless-JPEG scheduling. Embedders may select 1..4.
++  unsigned dngTileWorkers = 1;
++  unsigned dngTileWorkersUsed = 0;
++  uint32_t dngTilesCompleted = 0;
++
+   struct {
+     /* Should Quadrant Multipliers be applied to the IIQ raws? */
+     bool quadrantMultipliers = true;
+diff --git a/src/librawspeed/decompressors/AbstractDngDecompressor.cpp b/src/librawspeed/decompressors/AbstractDngDecompressor.cpp
+index 9ca0b2b3..0b8ad271 100644
+--- a/src/librawspeed/decompressors/AbstractDngDecompressor.cpp
++++ b/src/librawspeed/decompressors/AbstractDngDecompressor.cpp
+@@ -205,18 +205,51 @@ void AbstractDngDecompressor::decompressThread() const noexcept {
+     mRaw->setError("AbstractDngDecompressor: Unknown compression");
+ }
+
+-void AbstractDngDecompressor::decompress() const {
++DngTileSchedulerMetrics AbstractDngDecompressor::decompress() const {
++  DngTileSchedulerMetrics metrics;
++  if (compression == 7) {
++    try {
++      if (tileWorkers <= 1 || slices.size() <= 1) {
++        for (const auto& slice : slices) {
++          LJpegDecompressor decompressor(slice.bs, mRaw);
++          decompressor.decode(slice.offX, slice.offY, slice.width,
++                              slice.height, mFixLjpeg);
++        }
++        metrics = {slices.empty() ? 0U : 1U, slices.size()};
++      } else {
++      // RawImage's refcount lock is a no-op without OpenMP. Construct and
++      // destroy all per-tile decoders on the caller thread to avoid racing it.
++      std::vector<std::unique_ptr<LJpegDecompressor>> decompressors;
++      decompressors.reserve(slices.size());
++      for (const auto& slice : slices)
++        decompressors.emplace_back(
++            std::make_unique<LJpegDecompressor>(slice.bs, mRaw));
++      metrics = runDngTileJobs(slices.size(), tileWorkers, [&](size_t index) {
++        const auto& slice = slices[index];
++        decompressors[index]->decode(slice.offX, slice.offY, slice.width,
++                                     slice.height, mFixLjpeg);
++      });
++      }
++    } catch (RawDecoderException& err) {
++      mRaw->setError(err.what());
++    } catch (IOException& err) {
++      mRaw->setError(err.what());
++    }
++  } else {
+ #ifdef HAVE_OPENMP
+ #pragma omp parallel default(none) num_threads(                                \
+     rawspeed_get_number_of_processor_cores()) if (slices.size() > 1)
+ #endif
+-  decompressThread();
++    decompressThread();
++    metrics = {1, slices.size()};
++  }
+
+   std::string firstErr;
+   if (mRaw->isTooManyErrors(1, &firstErr)) {
+     ThrowRDE("Too many errors encountered. Giving up. First Error:\n%s",
+              firstErr.c_str());
+   }
++  return metrics;
+ }
+
+ } // namespace rawspeed
+diff --git a/src/librawspeed/decompressors/AbstractDngDecompressor.h b/src/librawspeed/decompressors/AbstractDngDecompressor.h
+index a9189038..0f521af6 100644
+--- a/src/librawspeed/decompressors/AbstractDngDecompressor.h
++++ b/src/librawspeed/decompressors/AbstractDngDecompressor.h
+@@ -25,6 +25,7 @@
+ #include "common/Point.h"                       // for iPoint2D
+ #include "common/RawImage.h"                    // for RawImage
+ #include "decompressors/AbstractDecompressor.h" // for AbstractDecompressor
++#include "decompressors/DngTileScheduler.h"
+ #include "io/ByteStream.h"                      // for ByteStream
+ #include <cassert>                              // for assert
+ #include <cstdint>                              // for uint32_t
+@@ -125,11 +126,11 @@ class AbstractDngDecompressor final : public AbstractDecompressor {
+ public:
+   AbstractDngDecompressor(const RawImage& img, DngTilingDescription dsc_,
+                           int compression_, bool mFixLjpeg_, uint32_t mBps_,
+-                          uint32_t mPredictor_)
++                          uint32_t mPredictor_, unsigned tileWorkers_)
+       : mRaw(img), dsc(dsc_), compression(compression_), mFixLjpeg(mFixLjpeg_),
+-        mBps(mBps_), mPredictor(mPredictor_) {}
++        mBps(mBps_), mPredictor(mPredictor_), tileWorkers(tileWorkers_) {}
+
+-  void decompress() const;
++  DngTileSchedulerMetrics decompress() const;
+
+   const DngTilingDescription dsc;
+
+@@ -139,6 +140,7 @@ public:
+   const bool mFixLjpeg = false;
+   const uint32_t mBps;
+   const uint32_t mPredictor;
++  const unsigned tileWorkers;
+ };
+
+ } // namespace rawspeed
+diff --git a/src/librawspeed/decompressors/DngTileScheduler.h b/src/librawspeed/decompressors/DngTileScheduler.h
+new file mode 100644
+index 00000000..4cd3d1f2
+--- /dev/null
++++ b/src/librawspeed/decompressors/DngTileScheduler.h
+@@ -0,0 +1,107 @@
++/*
++    RawSpeed - RAW file decoder.
++
++    This library is free software; you can redistribute it and/or modify it
++    under the terms of the GNU Lesser General Public License.
++*/
++
++#pragma once
++
++#include <algorithm>
++#include <atomic>
++#include <cstddef>
++#include <exception>
++#include <mutex>
++#include <thread>
++#include <utility>
++#include <vector>
++
++namespace rawspeed {
++
++struct DngTileSchedulerMetrics final {
++  unsigned workersUsed = 0;
++  size_t jobsCompleted = 0;
++};
++
++template <typename Job>
++DngTileSchedulerMetrics runDngTileJobs(size_t jobCount,
++                                       unsigned requestedWorkers, Job&& job) {
++  if (jobCount == 0)
++    return {};
++
++  const unsigned workerCount = std::min<unsigned>(
++      4, std::min<size_t>(std::max(1U, requestedWorkers), jobCount));
++  if (workerCount == 1) {
++    for (size_t index = 0; index < jobCount; ++index)
++      job(index);
++    return {1, jobCount};
++  }
++
++  std::atomic<size_t> nextJob{0};
++  std::atomic<size_t> jobsCompleted{0};
++  std::atomic<unsigned> workersUsedMask{0};
++  std::atomic<unsigned> workersReady{0};
++  std::atomic<bool> start{false};
++  std::atomic<bool> cancelled{false};
++  std::mutex failureMutex;
++  size_t firstFailedJob = jobCount;
++  std::exception_ptr firstFailure;
++
++  auto worker = [&](unsigned workerIndex, bool waitForStart) noexcept {
++    if (waitForStart) {
++      workersReady.fetch_add(1, std::memory_order_release);
++      while (!start.load(std::memory_order_acquire))
++        std::this_thread::yield();
++    }
++
++    while (!cancelled.load(std::memory_order_acquire)) {
++      const size_t index = nextJob.fetch_add(1, std::memory_order_relaxed);
++      if (index >= jobCount)
++        break;
++      workersUsedMask.fetch_or(1U << workerIndex, std::memory_order_relaxed);
++      try {
++        job(index);
++        jobsCompleted.fetch_add(1, std::memory_order_relaxed);
++      } catch (...) {
++        {
++          std::lock_guard<std::mutex> lock(failureMutex);
++          if (index < firstFailedJob) {
++            firstFailedJob = index;
++            firstFailure = std::current_exception();
++          }
++        }
++        cancelled.store(true, std::memory_order_release);
++      }
++    }
++  };
++
++  std::vector<std::thread> threads;
++  threads.reserve(workerCount - 1);
++  try {
++    for (unsigned index = 1; index < workerCount; ++index)
++      threads.emplace_back(worker, index, true);
++  } catch (...) {
++    cancelled.store(true, std::memory_order_release);
++    start.store(true, std::memory_order_release);
++    for (auto& thread : threads)
++      thread.join();
++    throw;
++  }
++
++  workersReady.fetch_add(1, std::memory_order_release);
++  while (workersReady.load(std::memory_order_acquire) != workerCount)
++    std::this_thread::yield();
++  start.store(true, std::memory_order_release);
++  worker(0, false);
++  for (auto& thread : threads)
++    thread.join();
++
++  if (firstFailure)
++    std::rethrow_exception(firstFailure);
++
++  return {static_cast<unsigned>(
++              __builtin_popcount(workersUsedMask.load(std::memory_order_relaxed))),
++          jobsCompleted.load(std::memory_order_relaxed)};
++}
++
++} // namespace rawspeed
+diff --git a/test/librawspeed/decompressors/CMakeLists.txt b/test/librawspeed/decompressors/CMakeLists.txt
+index a1280cc1..e5072f5f 100644
+--- a/test/librawspeed/decompressors/CMakeLists.txt
++++ b/test/librawspeed/decompressors/CMakeLists.txt
+@@ -1,6 +1,7 @@
+ FILE(GLOB RAWSPEED_TEST_SOURCES
+   "AbstractHuffmanTableTest.cpp"
+   "BinaryHuffmanTreeTest.cpp"
++  "DngTileSchedulerTest.cpp"
+   "HuffmanTableTest.cpp"
+   "LJpegPredictorTest.cpp"
+ )
+diff --git a/test/librawspeed/decompressors/DngTileSchedulerTest.cpp b/test/librawspeed/decompressors/DngTileSchedulerTest.cpp
+new file mode 100644
+index 00000000..e5e95421
+--- /dev/null
++++ b/test/librawspeed/decompressors/DngTileSchedulerTest.cpp
+@@ -0,0 +1,96 @@
++#include "decompressors/DngTileScheduler.h"
++#include <gtest/gtest.h>
++#include <atomic>
++#include <chrono>
++#include <cstddef>
++#include <cstdint>
++#include <mutex>
++#include <stdexcept>
++#include <thread>
++#include <unordered_set>
++#include <vector>
++
++namespace rawspeed_test {
++using namespace rawspeed;
++
++TEST(DngTileSchedulerTest, WorkerOneUsesCallerOnly) {
++  std::thread::id caller = std::this_thread::get_id();
++  std::vector<std::thread::id> threads(8);
++  const auto metrics = runDngTileJobs(threads.size(), 1, [&](size_t tile) {
++    threads[tile] = std::this_thread::get_id();
++  });
++
++  EXPECT_EQ(metrics.jobsCompleted, threads.size());
++  EXPECT_EQ(metrics.workersUsed, 1U);
++  for (const auto id : threads)
++    EXPECT_EQ(id, caller);
++}
++
++TEST(DngTileSchedulerTest, BoundedWorkersActuallyParticipate) {
++  for (unsigned requested : {2U, 3U, 4U}) {
++    std::mutex mutex;
++    std::unordered_set<std::thread::id> threads;
++    std::atomic<unsigned> arrived{0};
++    const auto metrics = runDngTileJobs(48, requested, [&](size_t) {
++      {
++        std::lock_guard<std::mutex> lock(mutex);
++        threads.insert(std::this_thread::get_id());
++      }
++      arrived.fetch_add(1, std::memory_order_relaxed);
++      while (arrived.load(std::memory_order_relaxed) < requested)
++        std::this_thread::yield();
++    });
++
++    EXPECT_EQ(metrics.jobsCompleted, 48U);
++    EXPECT_EQ(metrics.workersUsed, requested);
++    EXPECT_EQ(threads.size(), requested);
++  }
++}
++
++TEST(DngTileSchedulerTest, OutputIsDeterministicForEdgeAndWeirdWidthTiles) {
++  constexpr size_t tileCount = 11;
++  constexpr size_t weirdWidth = 503;
++  std::vector<uint64_t> reference(tileCount);
++  for (size_t i = 0; i < tileCount; ++i)
++    reference[i] = (i + 1) * weirdWidth * UINT64_C(0x9e3779b97f4a7c15);
++
++  for (unsigned repeat = 0; repeat < 20; ++repeat) {
++    for (unsigned workers : {1U, 2U, 3U, 4U}) {
++      std::vector<uint64_t> output(tileCount);
++      const auto metrics = runDngTileJobs(tileCount, workers, [&](size_t i) {
++        output[i] = (i + 1) * weirdWidth * UINT64_C(0x9e3779b97f4a7c15);
++      });
++      EXPECT_EQ(metrics.jobsCompleted, tileCount);
++      EXPECT_EQ(output, reference);
++    }
++  }
++}
++
++TEST(DngTileSchedulerTest, FirstFailureIsRethrownAfterJoinAndResultRejected) {
++  std::atomic<unsigned> active{0};
++  std::atomic<unsigned> completed{0};
++  bool published = false;
++
++  try {
++    const auto metrics = runDngTileJobs(48, 4, [&](size_t tile) {
++      active.fetch_add(1, std::memory_order_relaxed);
++      if (tile == 0) {
++        active.fetch_sub(1, std::memory_order_relaxed);
++        throw std::runtime_error("first tile failure");
++      }
++      std::this_thread::sleep_for(std::chrono::milliseconds(1));
++      completed.fetch_add(1, std::memory_order_relaxed);
++      active.fetch_sub(1, std::memory_order_relaxed);
++    });
++    published = metrics.jobsCompleted == 48;
++    FAIL() << "scheduler did not rethrow tile failure";
++  } catch (const std::runtime_error& error) {
++    EXPECT_STREQ(error.what(), "first tile failure");
++  }
++
++  EXPECT_EQ(active.load(), 0U);
++  EXPECT_FALSE(published);
++  EXPECT_LT(completed.load(), 48U);
++}
++
++} // namespace rawspeed_test
+diff --git a/test/librawspeed/decompressors/LJpegPredictorTest.cpp b/test/librawspeed/decompressors/LJpegPredictorTest.cpp
+index 18408059..ea5d5987 100644
+--- a/test/librawspeed/decompressors/LJpegPredictorTest.cpp
++++ b/test/librawspeed/decompressors/LJpegPredictorTest.cpp
+@@ -9,6 +9,7 @@
+ #include "common/RawImage.h"
+ #include "common/RawspeedException.h"
+ #include "decoders/RawDecoderException.h"
++#include "decompressors/AbstractDngDecompressor.h"
+ #include "decompressors/LJpegDecompressor.h"
+ #include "io/Buffer.h"
+ #include "io/ByteStream.h"
+@@ -391,5 +392,75 @@ TEST(LJpegPredictorComponentOrderTest, RejectsReorderedSosSelectors) {
+   EXPECT_THROW(decode(fixture), rawspeed::RawDecoderException);
+ }
+
++TEST(DngLJpegTileIntegrationTest, EdgeTilesAreIdenticalForOneToFourWorkers) {
++  constexpr int imageWidth = 5;
++  constexpr int imageHeight = 5;
++  constexpr int tileWidth = Width;
++  constexpr int tileHeight = Height;
++
++  for (unsigned workers : {1U, 2U, 3U, 4U}) {
++    auto image = rawspeed::RawImage::create(
++        {imageWidth, imageHeight}, rawspeed::TYPE_USHORT16, Components);
++    rawspeed::DngTilingDescription tiling(image->dim, tileWidth, tileHeight);
++    rawspeed::AbstractDngDecompressor decompressor(
++        image, tiling, 7, false, Precision, ~0U, workers);
++    std::vector<std::vector<uint8_t>> fixtures;
++    fixtures.reserve(tiling.numTiles);
++    for (unsigned tile = 0; tile < tiling.numTiles; ++tile)
++      fixtures.emplace_back(makeFixture(7, Expected));
++    for (unsigned tile = 0; tile < tiling.numTiles; ++tile) {
++      const rawspeed::Buffer buffer(fixtures[tile].data(), fixtures[tile].size());
++      decompressor.slices.emplace_back(
++          decompressor.dsc, tile,
++          rawspeed::ByteStream(rawspeed::DataBuffer(
++              buffer, rawspeed::Endianness::big)));
++    }
++
++    const auto metrics = decompressor.decompress();
++    EXPECT_EQ(metrics.jobsCompleted, tiling.numTiles);
++    EXPECT_GE(metrics.workersUsed, 1U);
++    EXPECT_LE(metrics.workersUsed, workers);
++    const auto pixels = image->getU16DataAsUncroppedArray2DRef();
++    for (int row = 0; row < imageHeight; ++row)
++      for (int col = 0; col < imageWidth; ++col)
++        for (int component = 0; component < Components; ++component) {
++          const int localRow = row % tileHeight;
++          const int localCol = col % tileWidth;
++          EXPECT_EQ(pixels(row, col * Components + component),
++                    Expected[(localRow * tileWidth + localCol) * Components +
++                             component]);
++        }
++  }
++}
++
++TEST(DngLJpegTileIntegrationTest, CorruptTileRejectsWholeDecode) {
++  auto image = rawspeed::RawImage::create({5, 5}, rawspeed::TYPE_USHORT16,
++                                          Components);
++  rawspeed::DngTilingDescription tiling(image->dim, Width, Height);
++  rawspeed::AbstractDngDecompressor decompressor(
++      image, tiling, 7, false, Precision, ~0U, 4);
++  std::vector<std::vector<uint8_t>> fixtures;
++  fixtures.reserve(tiling.numTiles);
++  for (unsigned tile = 0; tile < tiling.numTiles; ++tile)
++    fixtures.emplace_back(makeFixture(7, Expected));
++  fixtures[1][0] = 0;
++  for (unsigned tile = 0; tile < tiling.numTiles; ++tile) {
++    const rawspeed::Buffer buffer(fixtures[tile].data(), fixtures[tile].size());
++    decompressor.slices.emplace_back(
++        decompressor.dsc, tile,
++        rawspeed::ByteStream(rawspeed::DataBuffer(
++            buffer, rawspeed::Endianness::big)));
++  }
++
++  bool published = false;
++  try {
++    const auto metrics = decompressor.decompress();
++    published = metrics.jobsCompleted == tiling.numTiles;
++    FAIL() << "corrupt tile did not reject DNG decode";
++  } catch (const rawspeed::RawDecoderException&) {
++  }
++  EXPECT_FALSE(published);
++}
++
+ } // namespace
+ } // namespace rawspeed_test

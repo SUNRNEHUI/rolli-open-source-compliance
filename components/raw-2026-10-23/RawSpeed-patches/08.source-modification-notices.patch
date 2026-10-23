@@ -1,0 +1,395 @@
+--- a/src/librawspeed/common/Common.cpp
++++ b/src/librawspeed/common/Common.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/common/DefaultInitAllocatorAdaptor.h
++++ b/src/librawspeed/common/DefaultInitAllocatorAdaptor.h
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 04.clang-cl-compatibility.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/common/RawImage.h
++++ b/src/librawspeed/common/RawImage.h
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/common/RawspeedException.h
++++ b/src/librawspeed/common/RawspeedException.h
+@@ -1,3 +1,12 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/ArwDecoder.cpp
++++ b/src/librawspeed/decoders/ArwDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/DngDecoder.cpp
++++ b/src/librawspeed/decoders/DngDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/IiqDecoder.cpp
++++ b/src/librawspeed/decoders/IiqDecoder.cpp
+@@ -1,3 +1,11 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * 05.no-phase-one-correction.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/MosDecoder.cpp
++++ b/src/librawspeed/decoders/MosDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/NefDecoder.cpp
++++ b/src/librawspeed/decoders/NefDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/OrfDecoder.cpp
++++ b/src/librawspeed/decoders/OrfDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/RafDecoder.cpp
++++ b/src/librawspeed/decoders/RafDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/RawDecoder.cpp
++++ b/src/librawspeed/decoders/RawDecoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/RawDecoder.h
++++ b/src/librawspeed/decoders/RawDecoder.h
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decoders/Rw2Decoder.cpp
++++ b/src/librawspeed/decoders/Rw2Decoder.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/AbstractDngDecompressor.cpp
++++ b/src/librawspeed/decompressors/AbstractDngDecompressor.cpp
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/AbstractDngDecompressor.h
++++ b/src/librawspeed/decompressors/AbstractDngDecompressor.h
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp
++++ b/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/DngTileScheduler.h
++++ b/src/librawspeed/decompressors/DngTileScheduler.h
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/HasselbladDecompressor.cpp
++++ b/src/librawspeed/decompressors/HasselbladDecompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/LJpegDecompressor.cpp
++++ b/src/librawspeed/decompressors/LJpegDecompressor.cpp
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/LJpegDecompressor.h
++++ b/src/librawspeed/decompressors/LJpegDecompressor.h
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/NikonDecompressor.cpp
++++ b/src/librawspeed/decompressors/NikonDecompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/OlympusDecompressor.cpp
++++ b/src/librawspeed/decompressors/OlympusDecompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/PentaxDecompressor.cpp
++++ b/src/librawspeed/decompressors/PentaxDecompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/SonyArw2Decompressor.cpp
++++ b/src/librawspeed/decompressors/SonyArw2Decompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 03.remove-limits-and-logging.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/decompressors/VC5Decompressor.cpp
++++ b/src/librawspeed/decompressors/VC5Decompressor.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 04.clang-cl-compatibility.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/metadata/CameraMetaData.h
++++ b/src/librawspeed/metadata/CameraMetaData.h
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 01.CameraMeta-extensibility.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/src/librawspeed/tiff/TiffIFD.cpp
++++ b/src/librawspeed/tiff/TiffIFD.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * LibRaw 0.22.0 integration patches applied to this source snapshot on
++ * 2026-10-23 (snapshot application date, not original authorship date):
++ * 02.Makernotes-processing.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 
+--- a/test/librawspeed/decompressors/CMakeLists.txt
++++ b/test/librawspeed/decompressors/CMakeLists.txt
+@@ -1,3 +1,8 @@
++# LGPL component modification notice (packaging-only, 2026-10-23).
++# Local functional changes recorded 2026-07-12 by renhui sun:
++# 06.lossless-jpeg-predictors-2-7.patch
++# 07.bounded-dng-tile-parallelism.patch
++# This additional notice changes comments only; original notices are retained.
+ FILE(GLOB RAWSPEED_TEST_SOURCES
+   "AbstractHuffmanTableTest.cpp"
+   "BinaryHuffmanTreeTest.cpp"
+--- a/test/librawspeed/decompressors/DngTileSchedulerTest.cpp
++++ b/test/librawspeed/decompressors/DngTileSchedulerTest.cpp
+@@ -1,3 +1,9 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ #include "decompressors/DngTileScheduler.h"
+ #include <gtest/gtest.h>
+ #include <atomic>
+--- a/test/librawspeed/decompressors/LJpegPredictorTest.cpp
++++ b/test/librawspeed/decompressors/LJpegPredictorTest.cpp
+@@ -1,3 +1,10 @@
++/*
++ * LGPL component modification notice (packaging-only, 2026-10-23).
++ * Local functional changes recorded 2026-07-12 by renhui sun:
++ * 06.lossless-jpeg-predictors-2-7.patch
++ * 07.bounded-dng-tile-parallelism.patch
++ * This additional notice changes comments only; original notices are retained.
++ */
+ /*
+     RawSpeed - RAW file decoder.
+ 

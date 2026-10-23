@@ -1,0 +1,2644 @@
+{
+  "schema": 1,
+  "rawspeed_modification_notices": {
+    "original_patches_sha256": {
+      "01.CameraMeta-extensibility.patch": "fcbebe0d0e03ee3849fab63d5f115697fc5bcda124cdf56efe1f0de00826db0a",
+      "02.Makernotes-processing.patch": "865a63f2d42adfcb0728a556ca63c4822326d445f802e614e48e382aecf5cc7f",
+      "03.remove-limits-and-logging.patch": "d7924108af23bcbd3a95cebdd29465b00172695f9a4bbf4a6de8f756af5394c4",
+      "04.clang-cl-compatibility.patch": "44646383fc16c83b7c068452968b2e73c391201a0a01053a2b924cc4250ba7f1",
+      "05.no-phase-one-correction.patch": "048db1b2ed7735bfbb136a4f42ab726566ef0f31c5706899d72535cb7fe41313",
+      "06.lossless-jpeg-predictors-2-7.patch": "8905eabad408f9e547162d8acb287aaa69d9b87ff9ade7638f9fa9142d6040ff",
+      "07.bounded-dng-tile-parallelism.patch": "dbef42c5705dd314e568996b0bf3109bb8e6443be0ae42303dc356eca268f0ce"
+    },
+    "packaging_only_patch": "08.source-modification-notices.patch",
+    "packaging_only_patch_sha256": "12a138a1b093afd732a8a10f088f8e56d529040342166cc73741f48599e3c2fe",
+    "modified_sources": {
+      "src/librawspeed/common/Common.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "cd6f32d5a308e5fbe77de5681e91ffbb15cfa73147342444b57d8102fec7c7c7",
+        "after_notice_sha256": "1bfae216287d2b1e73d6bcf1eebc4e74843d927810bcb6f1662c3e7580030f24"
+      },
+      "src/librawspeed/common/DefaultInitAllocatorAdaptor.h": {
+        "functional_patches": [
+          "04.clang-cl-compatibility.patch"
+        ],
+        "before_notice_sha256": "76d3c7df1e70e67ed720a34cdea603a08d5eab9ca895001f6c522c69b3e9edd5",
+        "after_notice_sha256": "abfb5d49350e2a7cdcbce7082f8b2e2ea47e623346929fbcc37fdfe748d4ed20"
+      },
+      "src/librawspeed/common/RawImage.h": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch"
+        ],
+        "before_notice_sha256": "899aa47ef1370ecef6a481a689fe6a2cb2612ca280f54eeb9d3ef44498322789",
+        "after_notice_sha256": "0b97a475c1498853d3a203280536b8dba8faebbc0235ff7b87c5449b43eb0050"
+      },
+      "src/librawspeed/common/RawspeedException.h": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch",
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "e0af23840f6468bf9ab90c6178257075be13ea6afb9b7206521b1a8665f74f89",
+        "after_notice_sha256": "47c18f5cf0b56fbdffb5e7c2900b5576daff153cc7215e8568b6751fc4a1b17c"
+      },
+      "src/librawspeed/decoders/ArwDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "10b0fb67cd3c14a4ee9df87c8dbc137d460e3e3273b8d626fa9d992d80c97b77",
+        "after_notice_sha256": "a4c460515304f10dc6d376ad6dbd62b799f889bef296e0761a94845134f175cd"
+      },
+      "src/librawspeed/decoders/DngDecoder.cpp": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch",
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "8c11a7ba3f8d3e9d0377cf13bf49d09ca3858577fd44c71a948ed4a1a8a7c132",
+        "after_notice_sha256": "9c7bf21d253eb8ed5e9c84d8c6b537158712c58d2e3dc50f733ed0dcc9ae424e"
+      },
+      "src/librawspeed/decoders/IiqDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch",
+          "05.no-phase-one-correction.patch"
+        ],
+        "before_notice_sha256": "15ae2149f2ff72e69dd7be47d307ac835e66aca17fb00e4146ad01cfac7e1f52",
+        "after_notice_sha256": "4d313f004b4e75139999f9c66ebf2e04a90c3325dc976ec156f383229aa56e4c"
+      },
+      "src/librawspeed/decoders/MosDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "332ed37432fba652a493d3b83e79490b9bdec43cbb303a215ac2ec3851090b8f",
+        "after_notice_sha256": "2f9038959fb06867e88dd032fe71c786f6b513430633ca184f80b0b671bc62d2"
+      },
+      "src/librawspeed/decoders/NefDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "dea4dd68b15326afe2fdd09dc187b34dc1365ad9c6225ba716d16c0101b1d640",
+        "after_notice_sha256": "f74701fc1083f1004aadc32a7cdc5437264a1f116a19bf9396598d97a1a19946"
+      },
+      "src/librawspeed/decoders/OrfDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "db3500d01bb0b2ecdbf1b81a469d25595eef2b4556ab21ab1269902d062721cf",
+        "after_notice_sha256": "fbbafe7e760f813f79cc2f3b8499c064ed6f3ffd0bee9ab1f3e6d064d2a68d68"
+      },
+      "src/librawspeed/decoders/RafDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "2d7de9c249356d01a1e1533387265bb739a956404c07569afcf1a613b2cdeb14",
+        "after_notice_sha256": "f362708400001b2ab9cf7ae1048f200444df730c5764967c964e9c5b1637f5d6"
+      },
+      "src/librawspeed/decoders/RawDecoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "adbe6c7436573aaf942997bdd65ea9650adf2e970cca516a0888a2f204fde1cc",
+        "after_notice_sha256": "edc1e276dc66e8d3bd80254b86437b9711bbf59827eb4393f01cccbcec53ca54"
+      },
+      "src/librawspeed/decoders/RawDecoder.h": {
+        "functional_patches": [
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "79cd6660e8b43235c6a4f46bed18c1f8059591a084046056a07032a05bdfff43",
+        "after_notice_sha256": "f16843a3d40a36b3257620d01da8f57aa682c2d1290dd81937a01f836afb276c"
+      },
+      "src/librawspeed/decoders/Rw2Decoder.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "8ec327b2061e6c742daedc7e30841e1b7c5cf25a07bea7176e8937fe5bc5c6c5",
+        "after_notice_sha256": "51a7d17e79ca2135b5d45cd749776fdd3e7fef2fe5edf54d28bf0d425335bd7d"
+      },
+      "src/librawspeed/decompressors/AbstractDngDecompressor.cpp": {
+        "functional_patches": [
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "01f968a8c0f85d76de76f175202c87c72538da8ed11b3b6cbde4b2d7660d5433",
+        "after_notice_sha256": "6d0735f157854bf29f3b5e223c65f7e6114826d55c6bd2cfd535f529a2c21f1e"
+      },
+      "src/librawspeed/decompressors/AbstractDngDecompressor.h": {
+        "functional_patches": [
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "c7eb04733d574ff325434091d62ef651c90a2c716c5f5716647f863125ae146f",
+        "after_notice_sha256": "ad7d2383f5602c490ce95b8d5fbf82617cb0e23cbcea4be4ce53c7ae36357141"
+      },
+      "src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch"
+        ],
+        "before_notice_sha256": "7e23b69fdbd54e19abd750491590fd0576904e9c0f8cd741b4cfb017f468de06",
+        "after_notice_sha256": "f21ca2ef3ec6ba8d8dcb6b6b5577a5caa545d11fb0251641d3c08f8e99f3bb99"
+      },
+      "src/librawspeed/decompressors/DngTileScheduler.h": {
+        "functional_patches": [
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "35e74993c59d433e01e29e47ad83c130f67450a1a6944d4f27c021c9211d1d8b",
+        "after_notice_sha256": "4eaa0394c2419ce76402c3275c4ed97906ea8ba761b66a6f599e5b379a0b0a8a"
+      },
+      "src/librawspeed/decompressors/HasselbladDecompressor.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "d750e6808e44b8f5103dda12a609f2ef193ee0cea4edd91eec38433055e2817b",
+        "after_notice_sha256": "334b04ff5a92b1e1ec6c0c3acc777a0d2bff1e08f222cc7bffb5544fe0570aff"
+      },
+      "src/librawspeed/decompressors/LJpegDecompressor.cpp": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch"
+        ],
+        "before_notice_sha256": "8fad670c2c84098fac4b4dc0caa73ff7ce36746f9e7d686b0d3f94593a64d695",
+        "after_notice_sha256": "bfaab5ba124c286edb9c14c2064b13a3d6a0f5f041bd20be0b2f5895d5135618"
+      },
+      "src/librawspeed/decompressors/LJpegDecompressor.h": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch"
+        ],
+        "before_notice_sha256": "7448466eff27c23d740d60d59454ddbd46956e5ade15ef480332442315e2efb4",
+        "after_notice_sha256": "a3c6625fb7d47540bdebe5dee9b6db642be120248d4a17d6ef21ebda89578af4"
+      },
+      "src/librawspeed/decompressors/NikonDecompressor.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "a1cbea4f1cfce0b06370fd9c0dcbf80a803151b1fbc332e17be77d488a49b255",
+        "after_notice_sha256": "78fdc333afed3e92de19aa8e4b4b0a6f33e3d382730a2c30565cdbcdcf188ac8"
+      },
+      "src/librawspeed/decompressors/OlympusDecompressor.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "0b773ffde11f787fff946e6d174fce22a930edadf302bbab89c7fa8048447e93",
+        "after_notice_sha256": "d439c0a067fe4fc60cab46030a356dd94da33f13338f2a51528c533664d7d581"
+      },
+      "src/librawspeed/decompressors/PentaxDecompressor.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "861346d0d560ab4825f6daa2b2e99ba3f37ab5d65c7e5b795ae358f2ad76d7ff",
+        "after_notice_sha256": "705f0bb7358acb6a1754c5cc3798abff1b32b62bacebed2fe0e70dd57b25f989"
+      },
+      "src/librawspeed/decompressors/SonyArw2Decompressor.cpp": {
+        "functional_patches": [
+          "03.remove-limits-and-logging.patch"
+        ],
+        "before_notice_sha256": "d6e31ab30537e3054c508a13a2d9b2d8bfa849a511dac57d4d35ed3eb3ae08d7",
+        "after_notice_sha256": "4eead1fe4b672ccce3827d0c48f41ce9ae0b57b3bf032d913645c8ba1f1ac356"
+      },
+      "src/librawspeed/decompressors/VC5Decompressor.cpp": {
+        "functional_patches": [
+          "04.clang-cl-compatibility.patch"
+        ],
+        "before_notice_sha256": "a4cc84546dbf28ea216f116ffb0e4995b9c836c8929184fcc241c98941475415",
+        "after_notice_sha256": "15ef42e0ed01edcf4a932bb217ca1edcf8737f781cb7d61e43ac2bd8a2d924bc"
+      },
+      "src/librawspeed/metadata/CameraMetaData.h": {
+        "functional_patches": [
+          "01.CameraMeta-extensibility.patch"
+        ],
+        "before_notice_sha256": "0d03a4a726297ea9212aacfc08ff5f0446ac3128bf814579fb34b23b7bdc8917",
+        "after_notice_sha256": "d992b598cf761fc5f6d409c40542b8f5c68511a8d9ca4f0b4c6a97bf641d802a"
+      },
+      "src/librawspeed/tiff/TiffIFD.cpp": {
+        "functional_patches": [
+          "02.Makernotes-processing.patch"
+        ],
+        "before_notice_sha256": "4abc336c744e6c2797b3f328dc3395bb77dd2a1ef44fedfb632d54494070ee76",
+        "after_notice_sha256": "796046a38aea6019f7cbed3b312054aa7d7bf68ada9b866c367ecf62c400caa7"
+      },
+      "test/librawspeed/decompressors/CMakeLists.txt": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch",
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "813f1b880a80ba326dbee23b4c0e2e366e8b7551482f3ba501a45f1a5c1963d5",
+        "after_notice_sha256": "ad603fd5960dbd52ad643e2effe2446efe2541cca0da175d1cfc53abbc8758ac"
+      },
+      "test/librawspeed/decompressors/DngTileSchedulerTest.cpp": {
+        "functional_patches": [
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "07779390899056f0cbc2a46e7c21a87ffdf412e262f91cd5b3921342558b515d",
+        "after_notice_sha256": "559639a57083564f4637c1334ff43c19648adad6cd9c4668e00ba256e284597b"
+      },
+      "test/librawspeed/decompressors/LJpegPredictorTest.cpp": {
+        "functional_patches": [
+          "06.lossless-jpeg-predictors-2-7.patch",
+          "07.bounded-dng-tile-parallelism.patch"
+        ],
+        "before_notice_sha256": "82216310bd0e4b20a995acc21a469717b5fa3b8c339569a6e7f895dfb797dcd7",
+        "after_notice_sha256": "d28d78d3313829b61f01bb11e3ae36a98a9079b04858d964f354d20a15e5d40e"
+      }
+    }
+  },
+  "status": "component_source_snapshot_verified",
+  "rawspeed_upstream": {
+    "url": "https://github.com/darktable-org/rawspeed.git",
+    "commit": "de70ef5fbc62cde91009c8cff7a206272abe631e"
+  },
+  "libraw_upstream": {
+    "url": "https://github.com/LibRaw/LibRaw.git",
+    "commit": "0b56545a4f828743f28a4345cdfdd4c49f9f9a2a"
+  },
+  "source_scope": {
+    "rawspeed_top_level_allowlist": [
+      "CMakeLists.txt",
+      "LICENSE",
+      "README.rst",
+      "credits.txt",
+      "src",
+      "cmake",
+      "data",
+      "test"
+    ],
+    "libraw_top_level_allowlist": [
+      "src",
+      "internal",
+      "libraw"
+    ],
+    "capi_allowlist": [
+      "RawSpeed-API.h",
+      "cameras.cpp",
+      "rawspeed3_capi.cpp",
+      "rawspeed3_capi.h",
+      "rawspeed3_capi_test.cpp",
+      "rsxml2c.sh"
+    ],
+    "pugixml_allowlist": [
+      "pugiconfig.hpp",
+      "pugixml.hpp",
+      "pugixml.cpp"
+    ],
+    "license_allowlist": [
+      "CDDL-1.0.txt",
+      "LGPL-2.1-RAWSPEED.txt",
+      "MIT-PUGIXML.txt",
+      "BSD-3-Clause-LibRaw-DCB.txt"
+    ],
+    "additional_license_allowlist": [
+      "CC-BY-SA-3.0.txt",
+      "MIT-Adobe-DNG-LibRaw.txt",
+      "BSD-3-Clause-LibRaw-X3F.txt"
+    ],
+    "libraw_upstream_metadata_allowlist": [
+      "COPYRIGHT",
+      "LICENSE.CDDL",
+      "LICENSE.LGPL"
+    ],
+    "standalone_only_allowlist": [
+      "PerfLogging.hpp"
+    ]
+  },
+  "vendor_libraw_differences_from_upstream": [
+    "src/decoders/unpack.cpp",
+    "src/demosaic/aahd_demosaic.cpp",
+    "src/postprocessing/dcraw_process.cpp"
+  ],
+  "vendor_capi_differences_from_upstream": [
+    "RawSpeed-API.h",
+    "cameras.cpp",
+    "rawspeed3_capi.cpp",
+    "rawspeed3_capi.h",
+    "rawspeed3_capi_test.cpp"
+  ],
+  "vendor_libraw_source_sha256_before_notice_comments": {
+    "src/decoders/unpack.cpp": "e0feed7974bc91a7d1713b4be482a2829d0fff8ea2036bb14757cbe41d836898",
+    "src/demosaic/aahd_demosaic.cpp": "68f92363f385c36d601714e222dd1703d6f89a01f422d12437b81988fdaef176",
+    "src/postprocessing/dcraw_process.cpp": "90791614b24b3365a1095a9bcb81b4c3661cc3306ad51f86be1e2c4025f084dc"
+  },
+  "vendor_capi_source_sha256_before_notice_comments": {
+    "rawspeed3_capi.cpp": "d1f4151e7a864ef763dcdde7489dbdc386be298a878809536639c2525d34d0d1",
+    "rawspeed3_capi.h": "f7ecbf2554d687ecb012c2df8a4bc55f1a5e139ab9ed04d1a3f784ddab388485",
+    "rawspeed3_capi_test.cpp": "4114914ea2156410e4f6ec7b41670518231a41e935b14c953357a3c85e5b62bb"
+  },
+  "package_only_notice_comments": {
+    "LibRaw": {
+      "src/decoders/unpack.cpp": "Component modifications recorded 2026-07-12 by SUEN and renhui sun; 2026-08-31 by sunrenhui.",
+      "src/demosaic/aahd_demosaic.cpp": "Component modifications recorded 2026-10-14, 2026-10-15 and 2026-10-17 by sunrenhui.",
+      "src/postprocessing/dcraw_process.cpp": "Component modifications recorded 2026-10-17 by sunrenhui."
+    },
+    "RawSpeed-CAPI": {
+      "rawspeed3_capi.cpp": "Modified by SUEN and renhui sun on 2026-07-12.",
+      "rawspeed3_capi.h": "Modified by SUEN and renhui sun on 2026-07-12.",
+      "rawspeed3_capi_test.cpp": "Modified by SUEN and renhui sun on 2026-07-12."
+    }
+  },
+  "license_route_by_path": {
+    "RawSpeed/": "upstream LGPL version 2 or later; package selects LGPL-2.1",
+    "RawSpeed-patches/": "modified RawSpeed component; LGPL-2.1 route",
+    "LibRaw/": "LibRaw CDDL-1.0 option, subject to original embedded third-party notices",
+    "RawSpeed-CAPI/rawspeed3_capi.cpp": "LibRaw-derived wrapper, LGPL-2.1 option",
+    "RawSpeed-CAPI/rawspeed3_capi.h": "LibRaw-derived wrapper, LGPL-2.1 option",
+    "RawSpeed-CAPI/rawspeed3_capi_test.cpp": "LibRaw-derived wrapper, LGPL-2.1 option",
+    "RawSpeed-CAPI/rsxml2c.sh": "LibRaw-derived wrapper helper, LGPL-2.1 option",
+    "RawSpeed-CAPI/RawSpeed-API.h": "retained LGPL version 2 or later header",
+    "RawSpeed-CAPI/cameras.cpp": "generated CC-BY-SA-3.0 camera metadata",
+    "pugixml/": "MIT",
+    "PerfLogging.hpp": "LGPL-2.1-or-later; newly written packaging support only",
+    "build_rawspeed_ios.sh": "LGPL-2.1-or-later; newly written packaging support only",
+    "RawSpeed-patches/08.source-modification-notices.patch": "LGPL-2.1-or-later; newly written packaging support only"
+  },
+  "published_file_hashes_for_notice_changes": {
+    "LibRaw/src/decoders/unpack.cpp": "44195d75b2b1533b8b916f819219d0faac14a9e5d5b323c4737e7348cfcd4068",
+    "LibRaw/src/demosaic/aahd_demosaic.cpp": "bc7428d4709d29b9ed41b814679cc1c4b2319096dcd89515f2d8b486110327f1",
+    "LibRaw/src/postprocessing/dcraw_process.cpp": "690589c51f572aa05f3312600a6c50edda2daf8ac5575e29124c847e8f8c466d",
+    "RawSpeed-CAPI/rawspeed3_capi.cpp": "0bf7a0a2504e4804b6235532075bbc808dac0713cf6507ffc3d2a7d207a84057",
+    "RawSpeed-CAPI/rawspeed3_capi.h": "bd49284eaa8096286dea02ae81ef83da6a690ceeeb2a354416858a40f54084c5",
+    "RawSpeed-CAPI/rawspeed3_capi_test.cpp": "a7d92082fd509611a9b733cfc02b5b89292bd38eb851c9dafef3b596cae5d107"
+  },
+  "generated_cameras_cpp_matches_rawspeed_xml": true,
+  "files": [
+    {
+      "path": "LibRaw/COPYRIGHT",
+      "sha256": "574c88f5dd59414cfc896293a63defbc2d525a418ed413d7ab7dcc43cf79c509",
+      "bytes": 1153
+    },
+    {
+      "path": "LibRaw/LICENSE.CDDL",
+      "sha256": "0e3098d2d54a12434715f6679ea408d57da5e8d613c385c58ecc6fe5d30cc81f",
+      "bytes": 16906
+    },
+    {
+      "path": "LibRaw/LICENSE.LGPL",
+      "sha256": "eea173a556abac0370461e57e12aab266894ea6be3874c2be05fd87871f75449",
+      "bytes": 24389
+    },
+    {
+      "path": "LibRaw/internal/dcraw_defs.h",
+      "sha256": "111a87c4dc3c9b8681481aec580d122423547f097ebb949b44f286a7747832f7",
+      "bytes": 2108
+    },
+    {
+      "path": "LibRaw/internal/dcraw_fileio_defs.h",
+      "sha256": "bdf7f4436979f84f11fabc048c9e037adc31ba4eb5e43b0854cae42566e6cd46",
+      "bytes": 683
+    },
+    {
+      "path": "LibRaw/internal/defines.h",
+      "sha256": "252b22f03da4c086580153b4b9a76e3fdc31d61ee9059a2348c281022611f413",
+      "bytes": 6016
+    },
+    {
+      "path": "LibRaw/internal/dmp_include.h",
+      "sha256": "73d9af47a7e5a7ec1cef6789d3924076abc4f12e88f1d4325e0c829a55479071",
+      "bytes": 717
+    },
+    {
+      "path": "LibRaw/internal/libraw_cameraids.h",
+      "sha256": "69b7a108d7abe11b52b07543452631fd5496e4e00db596c82e99f8990f93dd58",
+      "bytes": 16637
+    },
+    {
+      "path": "LibRaw/internal/libraw_checked_buffer.h",
+      "sha256": "d55f9749f10fefac15102cf7d29477bd61bcbac8df4f241ac6240d2886810d06",
+      "bytes": 917
+    },
+    {
+      "path": "LibRaw/internal/libraw_cxx_defs.h",
+      "sha256": "a44523ea082a535c73a84b6f6f4c3cd47fd69018a04863d89c47c6a9f1b20dcb",
+      "bytes": 4963
+    },
+    {
+      "path": "LibRaw/internal/libraw_internal_funcs.h",
+      "sha256": "67dfcd0422965869a486811c0a2a6eb7c1f1a86c76add506338b6a396761696f",
+      "bytes": 17642
+    },
+    {
+      "path": "LibRaw/internal/losslessjpeg.h",
+      "sha256": "1b3358c9568d73ff883c84d92ce4f0b517213392abfbf818c12f5d3a35643d36",
+      "bytes": 7369
+    },
+    {
+      "path": "LibRaw/internal/var_defines.h",
+      "sha256": "7f36890d30d2ba1caccf00f3eb5984303a101539b901ca603c8f3b11a82e5319",
+      "bytes": 10356
+    },
+    {
+      "path": "LibRaw/internal/x3f_tools.h",
+      "sha256": "dd78c16dd739b1d2fd01650153811d4d503b9d3e0ae3d5e4ba527298e6fb192d",
+      "bytes": 14883
+    },
+    {
+      "path": "LibRaw/libraw/libraw.h",
+      "sha256": "48b3048304f42266ddb5bb5068f69427c249d574f80d8423387906d44bcae27d",
+      "bytes": 18773
+    },
+    {
+      "path": "LibRaw/libraw/libraw_alloc.h",
+      "sha256": "63194e1e960239db00ae7674f24530961d5e74bb7883b5e30f52fb2263137325",
+      "bytes": 3131
+    },
+    {
+      "path": "LibRaw/libraw/libraw_const.h",
+      "sha256": "793e565f566c749105ff14b236c96d6850f55d293f1ff1e009047664d5066c71",
+      "bytes": 26140
+    },
+    {
+      "path": "LibRaw/libraw/libraw_datastream.h",
+      "sha256": "382a77b9d9f3c595ee4248bbe81f44a0a548c22bf9f2bccfdbc64ce95a3d2dfd",
+      "bytes": 10943
+    },
+    {
+      "path": "LibRaw/libraw/libraw_internal.h",
+      "sha256": "50a814b8f5d8308d57d31aa616f239215042f3d4befea50c9a8af983f4bf9c27",
+      "bytes": 11143
+    },
+    {
+      "path": "LibRaw/libraw/libraw_types.h",
+      "sha256": "294f6d0c904d017d4b047fd30890e16dbd4a6b7665911b5aa1b99df7bde0aa20",
+      "bytes": 34253
+    },
+    {
+      "path": "LibRaw/libraw/libraw_version.h",
+      "sha256": "dfef53ab542d0c128854b26498564f483ae378c29f9dfcb24b9cfbff090868e9",
+      "bytes": 2467
+    },
+    {
+      "path": "LibRaw/src/Makefile",
+      "sha256": "b6eb00d29221106d8f7260487fc3ecb873a35e6fadc2735ad8bfb12d1a1d0786",
+      "bytes": 29
+    },
+    {
+      "path": "LibRaw/src/decoders/canon_600.cpp",
+      "sha256": "ebaac5d26a497092a24c0479b615250a4a74097807bcfd27b2591df147fa172f",
+      "bytes": 6080
+    },
+    {
+      "path": "LibRaw/src/decoders/crx.cpp",
+      "sha256": "ba5d1dbfb86b3e1fcfb198a1e048c0828ec4167aa7655fd29ed126c5448b1681",
+      "bytes": 88393
+    },
+    {
+      "path": "LibRaw/src/decoders/decoders_dcraw.cpp",
+      "sha256": "30493ef59b7efbedae6097417e8a65548f3aa813c3d90bcaa12f6d4cc64e7e89",
+      "bytes": 47014
+    },
+    {
+      "path": "LibRaw/src/decoders/decoders_libraw.cpp",
+      "sha256": "96d9f90c03b073c5a212edc1e6514ab1fd633ab6b36123e9c3405bdd6c0f61f2",
+      "bytes": 37540
+    },
+    {
+      "path": "LibRaw/src/decoders/decoders_libraw_dcrdefs.cpp",
+      "sha256": "a27330d65d63d208287a3d6445df6e77786c85d56ee9e029267a608aba5364cd",
+      "bytes": 11208
+    },
+    {
+      "path": "LibRaw/src/decoders/dng.cpp",
+      "sha256": "697a40f0fe11a9a1f3557dbef10bc42c57c8b02accefa6b487e62d17ea87af7c",
+      "bytes": 7546
+    },
+    {
+      "path": "LibRaw/src/decoders/fp_dng.cpp",
+      "sha256": "901bdd5c3101ccc385030688a55ee037101525915c59072777737c6d232ae33c",
+      "bytes": 21989
+    },
+    {
+      "path": "LibRaw/src/decoders/fuji_compressed.cpp",
+      "sha256": "9f9178364f878fc61b1ed8d0f372439b8424a0fd76b05fecf03276e0d96b2d48",
+      "bytes": 39719
+    },
+    {
+      "path": "LibRaw/src/decoders/generic.cpp",
+      "sha256": "54d6528a5c6cf938862fabb506dacf5785a2e6b86404c7908573cb07c15de79e",
+      "bytes": 2978
+    },
+    {
+      "path": "LibRaw/src/decoders/kodak_decoders.cpp",
+      "sha256": "f819457938a761344d07bf6520248f382013f490aa466fca03474de6d8e4fa3c",
+      "bytes": 15616
+    },
+    {
+      "path": "LibRaw/src/decoders/load_mfbacks.cpp",
+      "sha256": "a1068e6e49817959e5dfb161952f95a387aa382e12cced6f7e9bb48b2b8ba948",
+      "bytes": 27388
+    },
+    {
+      "path": "LibRaw/src/decoders/olympus14.cpp",
+      "sha256": "1f1f28cd21fc12cfbe8ca3a298e9f86906782f112901e75042c7af11919c224a",
+      "bytes": 8509
+    },
+    {
+      "path": "LibRaw/src/decoders/pana8.cpp",
+      "sha256": "d4abe09094ef86bccb852005755788de5b5d56b8d632f6b426534709edc6297f",
+      "bytes": 16215
+    },
+    {
+      "path": "LibRaw/src/decoders/smal.cpp",
+      "sha256": "da85bad70142dc1f5bb7803f65f7d1c7388037d3cac417980ae4efe4954d523e",
+      "bytes": 5134
+    },
+    {
+      "path": "LibRaw/src/decoders/sonycc.cpp",
+      "sha256": "e930146099dee4842ed305fb429c8a4a9449a004cb7c2f8fad955f93149f829e",
+      "bytes": 10179
+    },
+    {
+      "path": "LibRaw/src/decoders/unpack.cpp",
+      "sha256": "44195d75b2b1533b8b916f819219d0faac14a9e5d5b323c4737e7348cfcd4068",
+      "bytes": 20550
+    },
+    {
+      "path": "LibRaw/src/decoders/unpack_thumb.cpp",
+      "sha256": "42929f9fa44434318e8e5102e034f0c354f2dd892f1699b505f9dceba4095caf",
+      "bytes": 15276
+    },
+    {
+      "path": "LibRaw/src/decompressors/losslessjpeg.cpp",
+      "sha256": "285ca1fafce8107067814e9b640881d7e5213e255e78310aaa6211bb6a4981ae",
+      "bytes": 9179
+    },
+    {
+      "path": "LibRaw/src/demosaic/aahd_demosaic.cpp",
+      "sha256": "bc7428d4709d29b9ed41b814679cc1c4b2319096dcd89515f2d8b486110327f1",
+      "bytes": 35251
+    },
+    {
+      "path": "LibRaw/src/demosaic/ahd_demosaic.cpp",
+      "sha256": "5445b43a06543f2117cc3a0123e14c7b136cdc7fd92dc64d9af63671a66a6688",
+      "bytes": 10602
+    },
+    {
+      "path": "LibRaw/src/demosaic/dcb_demosaic.cpp",
+      "sha256": "e02a3626c5794c40221bde1be4bd55ee0cad15c860013319969f0cbec682410f",
+      "bytes": 32619
+    },
+    {
+      "path": "LibRaw/src/demosaic/dht_demosaic.cpp",
+      "sha256": "6203338d108919868ee8ad4d514712dbc3e438d150b608a7d6859a32a2a7f45c",
+      "bytes": 34161
+    },
+    {
+      "path": "LibRaw/src/demosaic/misc_demosaic.cpp",
+      "sha256": "206abd4c3a327cab1f00ee0ec490fbca7df223beea974f02c9acb33e09d93e37",
+      "bytes": 14118
+    },
+    {
+      "path": "LibRaw/src/demosaic/xtrans_demosaic.cpp",
+      "sha256": "5e9be038347f61f4d29c81ab2e2c76854797a51e3ef9d856b0fa2ba441edbea7",
+      "bytes": 17958
+    },
+    {
+      "path": "LibRaw/src/integration/dngsdk_glue.cpp",
+      "sha256": "e256049072cf45bc43acab3600a56cbb0ddd2e0bc5114e49020b58d6d6b948b5",
+      "bytes": 15549
+    },
+    {
+      "path": "LibRaw/src/integration/rawspeed_glue.cpp",
+      "sha256": "505264b9905f0f4d9918fe4cf68bb430efb06e8bb154d2d7b6869d82298fcf80",
+      "bytes": 8514
+    },
+    {
+      "path": "LibRaw/src/libraw_c_api.cpp",
+      "sha256": "2dbd9a0cb955988c136671933d22c7a62b19a7e61c776a51858009ca8002b89f",
+      "bytes": 11799
+    },
+    {
+      "path": "LibRaw/src/libraw_datastream.cpp",
+      "sha256": "efcfae34acc379f243813e768036a4c65c60d96495d1c824da81fec7b288869a",
+      "bytes": 25372
+    },
+    {
+      "path": "LibRaw/src/metadata/adobepano.cpp",
+      "sha256": "24963d7f98c7fc5fd9dd67e50be651a95e5779a6e92e53ead766bcd1af78b6f0",
+      "bytes": 4626
+    },
+    {
+      "path": "LibRaw/src/metadata/canon.cpp",
+      "sha256": "c4fb78c71326f190c986f85ceea5c4599db42e0a7d7a7d722b7c9ca393e18713",
+      "bytes": 45079
+    },
+    {
+      "path": "LibRaw/src/metadata/ciff.cpp",
+      "sha256": "837aa51751e86eac2d9084f6f889eaf38393bd668abced8fc3c0fa9e6beb8faa",
+      "bytes": 12544
+    },
+    {
+      "path": "LibRaw/src/metadata/cr3_parser.cpp",
+      "sha256": "67b2c5ebb9c6f2971d9b73de8fa20a116fb0b8992fafc6f46256fba01461fa58",
+      "bytes": 25622
+    },
+    {
+      "path": "LibRaw/src/metadata/epson.cpp",
+      "sha256": "700ef8fbcbee6c2be439a371dd7aac83ffc50ecacbfada4066c5073335899712",
+      "bytes": 2655
+    },
+    {
+      "path": "LibRaw/src/metadata/exif_gps.cpp",
+      "sha256": "d0f95d81785262d18012048ecfc04cda9c2b0767bc508af07e124c76a628871c",
+      "bytes": 12659
+    },
+    {
+      "path": "LibRaw/src/metadata/fuji.cpp",
+      "sha256": "6dee97ed726ac2ef5baaaf44bbabaaa2a64b17b82a13fbf117f192569a75eaec",
+      "bytes": 48998
+    },
+    {
+      "path": "LibRaw/src/metadata/hasselblad_model.cpp",
+      "sha256": "15dc26920365a72176dd888b3b600f0d627f17b5968d1f35912645214a29772d",
+      "bytes": 21153
+    },
+    {
+      "path": "LibRaw/src/metadata/identify.cpp",
+      "sha256": "8d611c544599d3f40de52e7a0c9027a97fa307b1543a57acfc42733bd726e772",
+      "bytes": 110326
+    },
+    {
+      "path": "LibRaw/src/metadata/identify_tools.cpp",
+      "sha256": "9620cb6d3a26d756bef1e790d1af0e5b28e8976b0fecb635dd4e15ac7e54f5cc",
+      "bytes": 3608
+    },
+    {
+      "path": "LibRaw/src/metadata/kodak.cpp",
+      "sha256": "a5167f19bee9be44c6a68bc3b605a0d372835e2e8415128c3fc210763b4bfd8b",
+      "bytes": 11468
+    },
+    {
+      "path": "LibRaw/src/metadata/leica.cpp",
+      "sha256": "ea325ec9edc0cc0f825299acb41a6f3bbec7e98343bfd18dd30bebfd4d4d9260",
+      "bytes": 11303
+    },
+    {
+      "path": "LibRaw/src/metadata/makernotes.cpp",
+      "sha256": "a8815454596d5b5404e5924b95a91bfb6ad3463492da9fabb43e97d00138e6e0",
+      "bytes": 22793
+    },
+    {
+      "path": "LibRaw/src/metadata/mediumformat.cpp",
+      "sha256": "8fb9dcc6f1b7e35a63630d45f500e9a46c444e69b20be4cf06bdcf9eee9f73ca",
+      "bytes": 15032
+    },
+    {
+      "path": "LibRaw/src/metadata/minolta.cpp",
+      "sha256": "b0e2da67138e7ac841e143f154e090dc47ce539be1f178b116096594508facd8",
+      "bytes": 4014
+    },
+    {
+      "path": "LibRaw/src/metadata/misc_parsers.cpp",
+      "sha256": "a7bfd414a63b150ec2c99452fdb4a3b8b7d62347649975dd89f519d4bfc11df6",
+      "bytes": 16279
+    },
+    {
+      "path": "LibRaw/src/metadata/nikon.cpp",
+      "sha256": "7f5b4c7ee5952ad0072aa3123d389ce0dc30ea3a074f8bc0cef0592bfe4d99e2",
+      "bytes": 38383
+    },
+    {
+      "path": "LibRaw/src/metadata/normalize_model.cpp",
+      "sha256": "1e12886c679c8941eb4f84e447ba89c7c88c31f3b2a05508fd1510939eb3fdfa",
+      "bytes": 52005
+    },
+    {
+      "path": "LibRaw/src/metadata/olympus.cpp",
+      "sha256": "ae433ad137094ca5d22bb84deedfeeee03f437604b7ab0628a89a5cfc92042a8",
+      "bytes": 19472
+    },
+    {
+      "path": "LibRaw/src/metadata/p1.cpp",
+      "sha256": "1b7d58e696ab416ab669e5a7a32ecdf5096774c3c1d5b583d5edf5b71b659ea8",
+      "bytes": 12231
+    },
+    {
+      "path": "LibRaw/src/metadata/pentax.cpp",
+      "sha256": "fa75732771aaa4950694968e075c97b85bbf924e1366a2c150a6ec8b1d0e2d8b",
+      "bytes": 19616
+    },
+    {
+      "path": "LibRaw/src/metadata/samsung.cpp",
+      "sha256": "0d858a3d60347d1b4bf394af9c714d4dbc2fb5c0a57b5b64de374f4d8efea002",
+      "bytes": 5046
+    },
+    {
+      "path": "LibRaw/src/metadata/sony.cpp",
+      "sha256": "a5340838ef11b4c0bb5da4eedb031fdcc7782e88df478fba5cfb9c0bc69afdc0",
+      "bytes": 84944
+    },
+    {
+      "path": "LibRaw/src/metadata/tiff.cpp",
+      "sha256": "a848c09ecbc7178bebdcca42638095c1afbcbd340b2189f54a2c51586dc984ef",
+      "bytes": 82748
+    },
+    {
+      "path": "LibRaw/src/postprocessing/aspect_ratio.cpp",
+      "sha256": "5a6e0e52ecb187d56e6e83ac62bd08112e3b6da24d023c1e1ce293519cd7b49d",
+      "bytes": 3472
+    },
+    {
+      "path": "LibRaw/src/postprocessing/dcraw_process.cpp",
+      "sha256": "690589c51f572aa05f3312600a6c50edda2daf8ac5575e29124c847e8f8c466d",
+      "bytes": 7818
+    },
+    {
+      "path": "LibRaw/src/postprocessing/mem_image.cpp",
+      "sha256": "0bbf23cda1101c11a4cc9cc5da31230fa7d0f8c6f00ac196489386fd66c0b54c",
+      "bytes": 7932
+    },
+    {
+      "path": "LibRaw/src/postprocessing/postprocessing_aux.cpp",
+      "sha256": "d614292a81c62d837303003397bbe5e07a21179eba93b7141f459e11a69c8c0c",
+      "bytes": 13654
+    },
+    {
+      "path": "LibRaw/src/postprocessing/postprocessing_ph.cpp",
+      "sha256": "bf52e61efd827fa243b36f9ec39787c07882ee6afe677ab3b0f3476a6cb36219",
+      "bytes": 1035
+    },
+    {
+      "path": "LibRaw/src/postprocessing/postprocessing_utils.cpp",
+      "sha256": "e8f9e4eba7c473eb19ab271bd149e6110fef0eb55a601e9a2db6466a20675ebf",
+      "bytes": 5735
+    },
+    {
+      "path": "LibRaw/src/postprocessing/postprocessing_utils_dcrdefs.cpp",
+      "sha256": "335761c5d3ce3c6150e09e7114dd9669323112c792651a7d70b34586bf4876ea",
+      "bytes": 10888
+    },
+    {
+      "path": "LibRaw/src/preprocessing/ext_preprocess.cpp",
+      "sha256": "ddfab7befb223d84a4fa5cd853ad5920743c39c907c9cb25393ca22167aa6c16",
+      "bytes": 3286
+    },
+    {
+      "path": "LibRaw/src/preprocessing/preprocessing_ph.cpp",
+      "sha256": "fd5935603f3cc68bb7ca72162f95dac3c899f9be6bc95eddc766816903199d24",
+      "bytes": 827
+    },
+    {
+      "path": "LibRaw/src/preprocessing/raw2image.cpp",
+      "sha256": "2b88eb7724e2320ee50bfc4898663e540d5057727c36aae92d5b5ed2b560e64b",
+      "bytes": 17638
+    },
+    {
+      "path": "LibRaw/src/preprocessing/subtract_black.cpp",
+      "sha256": "dfb40396a6654fd45adee4410ae4b75def7278b5b3187413bb8c6f7079a82239",
+      "bytes": 2424
+    },
+    {
+      "path": "LibRaw/src/tables/cameralist.cpp",
+      "sha256": "31c439e945821db15a3b90c1ab1341e679b91991dba92c0c252764dc76f5d919",
+      "bytes": 30387
+    },
+    {
+      "path": "LibRaw/src/tables/colorconst.cpp",
+      "sha256": "cad6b9a6661400e70de73fe0c0f9eae501ed58d98c8ecad7afae54275798609b",
+      "bytes": 2199
+    },
+    {
+      "path": "LibRaw/src/tables/colordata.cpp",
+      "sha256": "621d6a7e1a1904095d27087cf10ac7e935c6a984ec336816b79c273a8eaca768",
+      "bytes": 100614
+    },
+    {
+      "path": "LibRaw/src/tables/wblists.cpp",
+      "sha256": "172d53844b49df0875f84c1283a285c05414341a8528e8d49966a0c81addc0f6",
+      "bytes": 7970
+    },
+    {
+      "path": "LibRaw/src/utils/curves.cpp",
+      "sha256": "298a82b1d71c84ba1f1d061f888be6ca7c162a43985483232152b5e152ab47e2",
+      "bytes": 4187
+    },
+    {
+      "path": "LibRaw/src/utils/decoder_info.cpp",
+      "sha256": "1c81efc0587dbf253f9ee4c43ba840c11c0872e165f3be7eb6680c8d40912148",
+      "bytes": 13683
+    },
+    {
+      "path": "LibRaw/src/utils/init_close_utils.cpp",
+      "sha256": "f245e420f1c901c547428507f9c4517d787e1f5fbce489bc0a9d46949f433af9",
+      "bytes": 10963
+    },
+    {
+      "path": "LibRaw/src/utils/open.cpp",
+      "sha256": "cbc69286856d9fe7dfe833d35e143f76ba26a0ca9121352e141bf68364bcfeca",
+      "bytes": 49981
+    },
+    {
+      "path": "LibRaw/src/utils/phaseone_processing.cpp",
+      "sha256": "df0623853155461b19a3259828a00cd2f1b53cd593306827efa7889b606e2729",
+      "bytes": 3471
+    },
+    {
+      "path": "LibRaw/src/utils/read_utils.cpp",
+      "sha256": "87c84078a9592b3774bb89740044fd2578e76c1c61a44c801722105743c0a86d",
+      "bytes": 4667
+    },
+    {
+      "path": "LibRaw/src/utils/thumb_utils.cpp",
+      "sha256": "782a8fe24bae94f0c064e71b4b696071c520bb730fd51414087635fa8e8ee4bd",
+      "bytes": 9777
+    },
+    {
+      "path": "LibRaw/src/utils/utils_dcraw.cpp",
+      "sha256": "61d3fda9d20a8263bbb5b9b09a41c0c37d2729763cf4b1742fa63a784651ce73",
+      "bytes": 10245
+    },
+    {
+      "path": "LibRaw/src/utils/utils_libraw.cpp",
+      "sha256": "a3d6fbce952d0c61b262252544d238cf8e6304fbe2b7b6fd5998bc7fc7b37b32",
+      "bytes": 19364
+    },
+    {
+      "path": "LibRaw/src/write/apply_profile.cpp",
+      "sha256": "b4052e42ea8444fde9ec99eb6a21576521354cff25f1220003836495fa314c76",
+      "bytes": 2253
+    },
+    {
+      "path": "LibRaw/src/write/file_write.cpp",
+      "sha256": "edb26d8993afa4c79c726c694abc60e6b3e11289adc66def0b9de332522e0ea3",
+      "bytes": 10928
+    },
+    {
+      "path": "LibRaw/src/write/tiff_writer.cpp",
+      "sha256": "830a24b827e7913f522f43b34162164fa30c392d1450ea17b985aefcba181f4c",
+      "bytes": 1879
+    },
+    {
+      "path": "LibRaw/src/write/write_ph.cpp",
+      "sha256": "e4f8d4cd75379a3af3827d2794a03773afffa27a7356bbe0cdb841e753cb10dc",
+      "bytes": 1069
+    },
+    {
+      "path": "LibRaw/src/x3f/x3f_parse_process.cpp",
+      "sha256": "2d60bf8de89818b9b1406d7524ee090d71c1a6ffd7343939e984b95fe0baff97",
+      "bytes": 25243
+    },
+    {
+      "path": "LibRaw/src/x3f/x3f_utils_patched.cpp",
+      "sha256": "00c21cd2708b8170a7b5e04a81c0b0039362202f50cc96073cd26e0715c9536d",
+      "bytes": 59710
+    },
+    {
+      "path": "PerfLogging.hpp",
+      "sha256": "8d0e3b38c47b5f75e84b7929d93bfddc58c830f5c6248736994e2f4316ac35d5",
+      "bytes": 560
+    },
+    {
+      "path": "README.md",
+      "sha256": "31525105b97456a3dc2f1fbe497f1b5d8d8e20d8e2ca7511df0dfa0ede4dfa30",
+      "bytes": 5666
+    },
+    {
+      "path": "RawSpeed/CMakeLists.txt",
+      "sha256": "1a06722d4b6990a8d4195ae11c700515ab898f053cc3e1fbd610e16525caeac1",
+      "bytes": 10030
+    },
+    {
+      "path": "RawSpeed/LICENSE",
+      "sha256": "592987e8510228d546540b84a22444bde98e48d03078d3b2eefcd889bec5ce8c",
+      "bytes": 26521
+    },
+    {
+      "path": "RawSpeed/README.rst",
+      "sha256": "f690e6e60f11dbaa39930efe2a6f6a516772cace805d9c975e5a0cab54c505e9",
+      "bytes": 4826
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/CheckCXXCompilerFlagAndEnableIt.cmake",
+      "sha256": "629286e8fa2e28fbd5d5ddb22ec7399a1b4a7b451c06e81c2a46bba2898db150",
+      "bytes": 814
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/CheckJPEGSymbols.cmake",
+      "sha256": "ecc4eec258b37cdd2a2c202855c1869186d7dfa92ced9ac6adc40953b8dc5482",
+      "bytes": 532
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/CheckZLIB.cmake",
+      "sha256": "ee4546413a2712326b61ad26960222cd56a6356f1e5d5867ca8a449168fb8011",
+      "bytes": 2039
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/CpuMarch.cmake",
+      "sha256": "a1799de6157ff72ae343d4e07f41b87084a839407818a088cf369923e8f110a4",
+      "bytes": 1328
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindCppFilt.cmake",
+      "sha256": "58b50c0221d595b8da3017d1b1fe172d5daef493ed37f29ade6a2bc025cd51e7",
+      "bytes": 545
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindDemangler.cmake",
+      "sha256": "e186c644570d321522eeb973b8de4bbfb16aa28d8786ff8ef5b4bb79ed449a4e",
+      "bytes": 884
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindFind.cmake",
+      "sha256": "dcebb4844b3197eb010f56c414235a20299f666681b91c950ea02d87e0d14993",
+      "bytes": 357
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindGCCAr.cmake",
+      "sha256": "682ee6e5abcec38f07b978e3ca25492d5ab0e5ababade609b3c4bf1677c2ed8d",
+      "bytes": 378
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindGCCNm.cmake",
+      "sha256": "dfa3f9a41ff9bbba6a9d3511ccb748d075d1f99288e9c45f4a67c3a59ee2c569",
+      "bytes": 386
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindGCCRanLib.cmake",
+      "sha256": "703c4cef7064e1b95ac5702731467644e00c95f3c6de67d0617017f6ebd4f243",
+      "bytes": 391
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindGCov.cmake",
+      "sha256": "0e6b412963964a112bb30c2271fe12fb81a1fb7216413515d8acc08e32d78e39",
+      "bytes": 416
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindGenHtml.cmake",
+      "sha256": "82df127335f63cb0eecdaa8cb5d7cfc47e9b5228387492ca931aed4e9e2a663b",
+      "bytes": 390
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLCov.cmake",
+      "sha256": "ff01012a13ba3a8bd568dbd4b04e230eca4a0f54d1038ce82ee8bfdb75e247d3",
+      "bytes": 331
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMAr.cmake",
+      "sha256": "f4f67d595914a00bff76897396fddbaa5f05802b4e162a4e2682bf5283b21d93",
+      "bytes": 407
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMCXXFilt.cmake",
+      "sha256": "5932c19d21ba452444d77edab4417734597cbbc0b305aa9116793122637a14e8",
+      "bytes": 646
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMClangTidy.cmake",
+      "sha256": "f5b977c5586ede968bbbfb96823a12fe9735a01b8aef41fab0af123a1fae7d0a",
+      "bytes": 405
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMCov.cmake",
+      "sha256": "b1830e11ca9eac86024889e5c62f9372b5df0387eda976f4174b8d0e33cc633b",
+      "bytes": 474
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMLLD.cmake",
+      "sha256": "8d3b9ef12d83186680a3c0a6a9a8499bfce755822892ed19a94a3857da534d90",
+      "bytes": 1116
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMNm.cmake",
+      "sha256": "9bfbcfb1394bcdd6af244fce2ff4a1f2aff5f3d41ebd824cb55cc30db3155cfe",
+      "bytes": 416
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMObjCopy.cmake",
+      "sha256": "71e387619cb6e7edd3cb01eeadabd019a775daafeaccb952142aa15600b08b26",
+      "bytes": 397
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMObjDump.cmake",
+      "sha256": "cc997deaa3b766e96847c10690acc1226c2ae951cdac65ac070a29201c2ec15d",
+      "bytes": 400
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMOptViewer.cmake",
+      "sha256": "dd7f20382424da16b89462943e6d551eb3738917412cee4d545bedd1eb11cc98",
+      "bytes": 387
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMProfData.cmake",
+      "sha256": "eb5638ca4ab88cb49f4cb54d0ae3156c2f15de9df0917ea16c2a9cea04d18919",
+      "bytes": 522
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLLVMRanLib.cmake",
+      "sha256": "620ffce0c1aaa00f6ad117bb5eadacd3a5bbfc695ab5d8cc822db7a03b5b044b",
+      "bytes": 395
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindLibFuzzingEngine.cmake",
+      "sha256": "8554417d886d5eb580d27d6dc1e56528b61db36736250a474067f2d706705a10",
+      "bytes": 915
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindPugixml.cmake",
+      "sha256": "31749517e737f98749788250f3cc04c11927a9ec31c9de02f6d226755d9d2bef",
+      "bytes": 1049
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindSphinx.cmake",
+      "sha256": "1453586dcf57335b08e0899f8cd4d38fa594202fd3c1cb5637d0cd013f5b7582",
+      "bytes": 360
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/FindXMLLINT.cmake",
+      "sha256": "90c532ae3588cf6fc12c3ad975923d242160bd94cc149a890d606ca08cb5ecf4",
+      "bytes": 480
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/GoogleBenchmark.cmake",
+      "sha256": "4d016562149264dbb9db13ff3f07ff933bbdb197cdd0d0b4b6fe867890d2d429",
+      "bytes": 2082
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/GoogleBenchmark.cmake.in",
+      "sha256": "1ccff6fbd5ea25eb275d22672013a1af1f57342b286a07e9eec7b2290f4f805d",
+      "bytes": 2382
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/GoogleTest.cmake",
+      "sha256": "c7695c6a0018da80b47bc8f52ec3658363f3ae9182c07ea39edd77f21ba8aedb",
+      "bytes": 2555
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/GoogleTest.cmake.in",
+      "sha256": "005486a0f5eb0e572dee8f6309952fefe6b7b6d812a5e9cc231abcc29fdf795d",
+      "bytes": 2705
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/LLVMOpenMP.cmake",
+      "sha256": "822dc841d28af1a3e48272830501f1c8db6fb4b2fc6d4c1c0f6095a520fd5d34",
+      "bytes": 2717
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/LLVMOpenMP.cmake.in",
+      "sha256": "4a4431002a17cb8116cf60b01d2a061ae3ab05168dccaae63dde8bfd01d54553",
+      "bytes": 2405
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/LibFindMacros.cmake",
+      "sha256": "47342dc7580b941c7ae2988c91b3a4e22b65a3d3f25f174248db5b1bb1d28a19",
+      "bytes": 10703
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/Pugixml.cmake",
+      "sha256": "39728ea766f27d73bab94a3b130a9e02b13bb9df5a874faf09dc4f75a1c4f278",
+      "bytes": 1899
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/Pugixml.cmake.in",
+      "sha256": "f38911f8f04ceb4ae54bfa913002ebd49b263fe56b2db7fd85525e9262f9d73c",
+      "bytes": 2168
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/Zlib.cmake",
+      "sha256": "ad6b254dac45678e87e17cb839e1d44f55b24b923481428bedaf3099b1dde0eb",
+      "bytes": 2004
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/Zlib.cmake.in",
+      "sha256": "b1c2dd9e1f94ab0b3bee8aa060460c1d540d3594e0dc88844c838d10817fb4d2",
+      "bytes": 2115
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/cpu-cache-line-size.cmake",
+      "sha256": "10563ec11291b52e88100bf2e25e6d5dfcec720d548b36398f59619c78ee30d5",
+      "bytes": 1251
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/cpu-cache-line-size.cpp",
+      "sha256": "404fbf9a630d40ff0d2224a93a7757c7f2476307b25e2757c99038753f447d3a",
+      "bytes": 1567
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/cpu-page-size.cmake",
+      "sha256": "c46eb2f73b11aac10d869ecb9a23b43292afd25f7b6c1e596846af411c3a9e6a",
+      "bytes": 1003
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/cpu-page-size.cpp",
+      "sha256": "db0fbcf005c8ac6e89ed1e3e6e3d612b77c34e38ce5dc1d2d5c8e2e69d95c488",
+      "bytes": 666
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/memory-align-alloc.cmake",
+      "sha256": "ce9a766c497d9917aed4182fafbe0350e62b68f70998cc365c840f85414a4521",
+      "bytes": 774
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/run-xmllint.cmake",
+      "sha256": "ce39c40513f0cc88bce53b33020e5d42992f596ee1aff4b854a28c99dfad4ecd",
+      "bytes": 690
+    },
+    {
+      "path": "RawSpeed/cmake/Modules/thread-local.cmake",
+      "sha256": "a54891ee2ce0614b20bcb5a10ce1c1ce25433d5368d57a9a750d56cfb10070eb",
+      "bytes": 445
+    },
+    {
+      "path": "RawSpeed/cmake/build-type.cmake",
+      "sha256": "6cf3663604c032834149b1fbaa4cf45f6e36e50d580f78176dfd1bcd32c9b2b6",
+      "bytes": 1843
+    },
+    {
+      "path": "RawSpeed/cmake/clang-tidy.cmake",
+      "sha256": "7a74abef6f95f611b8084c5a28ebd2dfbfd6ed440565981e1d6e3decea0d307c",
+      "bytes": 229
+    },
+    {
+      "path": "RawSpeed/cmake/cmake-command-wrappers.cmake",
+      "sha256": "598008b8f5eb527a78e75989e42c14318bc784b136052d5f886c6c2e6bf5ab3c",
+      "bytes": 779
+    },
+    {
+      "path": "RawSpeed/cmake/compiler-flags.cmake",
+      "sha256": "33955bb968f702834a8b316be3976a08aa07557a7b6c75188dcc9bc7ffd8467a",
+      "bytes": 7879
+    },
+    {
+      "path": "RawSpeed/cmake/compiler-versions.cmake",
+      "sha256": "77828f343b40ba438863b8d974d7a1679b968ded7265781870e165ccb651e344",
+      "bytes": 6288
+    },
+    {
+      "path": "RawSpeed/cmake/compiler-warnings-clang.cmake",
+      "sha256": "0a9e18da63ceeb14c01c6ce1e79db10e5dc6549087a0d82aaf9ca740de4393e9",
+      "bytes": 3385
+    },
+    {
+      "path": "RawSpeed/cmake/compiler-warnings-gcc.cmake",
+      "sha256": "92006c16a890652ec8aa1b697d8d2b670f6a9eb65580a2371f92c3d872fa4c5b",
+      "bytes": 1231
+    },
+    {
+      "path": "RawSpeed/cmake/compiler-warnings.cmake",
+      "sha256": "2dc3eaacc05ac005cc4b892b7153a3dace6a531e3ec0129cd1217d0953da1b82",
+      "bytes": 779
+    },
+    {
+      "path": "RawSpeed/cmake/debug-info.cmake",
+      "sha256": "c06034d516fcf45ba1633db6bcb31b64fc70d71e1e9aabafb99e0aa7a12e7a53",
+      "bytes": 283
+    },
+    {
+      "path": "RawSpeed/cmake/gcc-coverage.cmake",
+      "sha256": "020e55ed3a8fc693fb96da69f44d82030c245965069c6f01b1d5121c0e13c83d",
+      "bytes": 1408
+    },
+    {
+      "path": "RawSpeed/cmake/gcc-gcov.cmake",
+      "sha256": "a403f6774114051a05755e87152b36fd4df299b96f34f1dd95bf19dc062ba0a8",
+      "bytes": 1148
+    },
+    {
+      "path": "RawSpeed/cmake/gcc-toolchain.cmake",
+      "sha256": "5577cbf0d7bab468a125bcff23ccf88fbc756c91754f45fdae9f9ca01d9aab04",
+      "bytes": 346
+    },
+    {
+      "path": "RawSpeed/cmake/genhtml.cmake",
+      "sha256": "970a8efa9712e8fe1e939b5856ffa845981304d54509782e3e92ac69fa425122",
+      "bytes": 1081
+    },
+    {
+      "path": "RawSpeed/cmake/iwyu.cmake",
+      "sha256": "fce09bcfdef8f4e642b87c5024c172c154fbdef47f4b4d55ea496cd2779239e5",
+      "bytes": 1679
+    },
+    {
+      "path": "RawSpeed/cmake/iwyu.imp",
+      "sha256": "ae2c24e1803d795c5f14ac4f41e6d7e9e12c85f22e3ca1e6de88c173190ea2da",
+      "bytes": 946
+    },
+    {
+      "path": "RawSpeed/cmake/lcov.cmake",
+      "sha256": "6016dc26148d86dc1acdfc52f676e148d0cc4d1f2348d806da38825fdbb5e23a",
+      "bytes": 2031
+    },
+    {
+      "path": "RawSpeed/cmake/libc++.cmake",
+      "sha256": "f8e840cfbf003198d5dae68ee4de2b68c08cfefa52d49952e3aa5308738cc0aa",
+      "bytes": 524
+    },
+    {
+      "path": "RawSpeed/cmake/llvm-cov.cmake",
+      "sha256": "3d3f2a2e631844b2de3e831acdef3f3e76bb200ecd0e860e25c08c5a108576c4",
+      "bytes": 1655
+    },
+    {
+      "path": "RawSpeed/cmake/llvm-opt-report.cmake",
+      "sha256": "07528179b66a974b31a9f637ce9c2730759602e677a3f13802ea7193aed9eb83",
+      "bytes": 1148
+    },
+    {
+      "path": "RawSpeed/cmake/llvm-profdata.cmake",
+      "sha256": "a63648228acbc032e4c0fb56de9e246da83d915a935972a009e9169e9fa2b548",
+      "bytes": 901
+    },
+    {
+      "path": "RawSpeed/cmake/llvm-toolchain.cmake",
+      "sha256": "1c52f14e30d4b7a6a37726aa309f1f400e383dbac38671e609fbd7291cf8f76a",
+      "bytes": 622
+    },
+    {
+      "path": "RawSpeed/cmake/sample-based-testing.cmake",
+      "sha256": "3179f97e42033aa1cd4f1f8d1d172f38fc3c9195f2b721215b17124e2b99da98",
+      "bytes": 3878
+    },
+    {
+      "path": "RawSpeed/cmake/src-dependencies.cmake",
+      "sha256": "bf4c34586bf043a86ffe1c2aee26545b5fd6d18b84e6d5e607bfbd32430c899e",
+      "bytes": 7324
+    },
+    {
+      "path": "RawSpeed/credits.txt",
+      "sha256": "7a768ac51bb9b96022fda25eb6051d18934a322683a498f81f30129181cc5d55",
+      "bytes": 782
+    },
+    {
+      "path": "RawSpeed/data/CMakeLists.txt",
+      "sha256": "f2102177a3d3bb70a65f1741a3b8fc5f12124e030a3b6ea0dedaf49da1d9044d",
+      "bytes": 328
+    },
+    {
+      "path": "RawSpeed/data/README.md",
+      "sha256": "1bc78ee3d5c7bab8d84fc88de3947adb7eb439d3ddb431dbd96803a74107d504",
+      "bytes": 6532
+    },
+    {
+      "path": "RawSpeed/data/cameras.xml",
+      "sha256": "fb11ae06085d661f225467231973149ce299d19f9608bf385e7556cc2a971dc7",
+      "bytes": 402730
+    },
+    {
+      "path": "RawSpeed/data/cameras.xsd",
+      "sha256": "fff741ac217b7b4c435b8a14747590e9f6a108f0fe7259623fdb3a4d268c30a2",
+      "bytes": 19372
+    },
+    {
+      "path": "RawSpeed/data/showcameras.xsl",
+      "sha256": "6250ddfb10cfa9b6e5cf14b1e486cc57fe797f1474281157ce76455998d7c3f1",
+      "bytes": 5858
+    },
+    {
+      "path": "RawSpeed/src/CMakeLists.txt",
+      "sha256": "aeb62f0462171efed77868628ded5acd9f84b304c1711916d5249d5ffe09257e",
+      "bytes": 396
+    },
+    {
+      "path": "RawSpeed/src/config.h.in",
+      "sha256": "59d3ef33db1fabf288cf32935b17af02f12ac2b0c843568cde725013cf499799",
+      "bytes": 2853
+    },
+    {
+      "path": "RawSpeed/src/external/AddressSanitizer.h",
+      "sha256": "be902c977414ee3d625ef8ae89c296cba441b17ebdf9018e8cf61055ed7dc05d",
+      "bytes": 3265
+    },
+    {
+      "path": "RawSpeed/src/external/CMakeLists.txt",
+      "sha256": "f4c549522e707d651161f047358605dfddb476d38ca005087038ac6a9dcc02e3",
+      "bytes": 240
+    },
+    {
+      "path": "RawSpeed/src/external/MemorySanitizer.h",
+      "sha256": "afed432422c2dc9ad8ab84b65f2135a4a9ff8c0447b969779f495d23643d3aa3",
+      "bytes": 2296
+    },
+    {
+      "path": "RawSpeed/src/external/ThreadSafetyAnalysis.h",
+      "sha256": "89afa0fc3da6d59068c96a62dac7059ce502576a241c2e355b5f2c11c332ebee",
+      "bytes": 5434
+    },
+    {
+      "path": "RawSpeed/src/external/gopro/vc5/table17.inc",
+      "sha256": "2b910fc4a53723c73dffeb6cd22609c003d733d807e9db6d0931efd9c2929698",
+      "bytes": 10925
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/CMakeLists.txt",
+      "sha256": "2b3ed4b0cd70952c6d1cdd67c7cce96e734bf015440051bb7151863a3eb6cb1a",
+      "bytes": 288
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/README.md",
+      "sha256": "9d0f68a94ab87fdc602c28dd525d37013e29600fa069aa3537d87078ca8cd45c",
+      "bytes": 13385
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/RawSpeed-API.h",
+      "sha256": "2af8e85a512bfa06d3d7016d902e82f46db02bbfb32cb73dc961d4c3e841b419",
+      "bytes": 1389
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Array2DRef.h",
+      "sha256": "8d7e91e568ab5b88dd67938b059f020e1298bed5ca890a15dc6d324ece1486ac",
+      "bytes": 2909
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/CMakeLists.txt",
+      "sha256": "3ef7225dd72b2a9eb9bbca7c1f1bc17b3c15ec6707ef654aabdff5c9d3a400cc",
+      "bytes": 1068
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/ChecksumFile.cpp",
+      "sha256": "e866c4348ed5e98f5f38290f5c1411ff640d5fd59a2d3a2364aa7aa4170d4b17",
+      "bytes": 3265
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/ChecksumFile.h",
+      "sha256": "e7c4224449f2ce31b005448eee2d56d0b53290856c9019916295a05c1afbc946",
+      "bytes": 1339
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Common.cpp",
+      "sha256": "136d43e5a127eb53e5693a11a8a498df9f403f0dc1ecd47c1fc635a04e12648d",
+      "bytes": 1677
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Common.h",
+      "sha256": "1ee6c960f6fff10e568a8a22c8c11045d997c8ea1849ea84cb1e99a8881b88d2",
+      "bytes": 7883
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Cpuid.cpp",
+      "sha256": "6c51a2bae797a1c0d640d58b56040579fa4b982984a4329c9013104ede2efa5c",
+      "bytes": 1292
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Cpuid.h",
+      "sha256": "706ec4779f45515a97daac1453144055a41cb8db26c57050c216619e348cc933",
+      "bytes": 960
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/CroppedArray2DRef.h",
+      "sha256": "432ee6c774ba7b6c9dc9bc87e86504260b55a5d616a6017f47d9a7ce83b59850",
+      "bytes": 3025
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/DefaultInitAllocatorAdaptor.h",
+      "sha256": "a83c96a4b0521fe62f65a69546393a624db975b91be4c5600899e6c1e0b14c10",
+      "bytes": 3434
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/DngOpcodes.cpp",
+      "sha256": "d9108c8f80d181d5edae963f23268fdaee886ef17bb27bd34cfa45a5fd2c3e0e",
+      "bytes": 20540
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/DngOpcodes.h",
+      "sha256": "5402362e319bfafb6730f808544e7459fafa0c8804a3c8041ce451814e728d32",
+      "bytes": 2139
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/ErrorLog.cpp",
+      "sha256": "d145a7cec17afe5175d49b2460ad742b8bc649d9d3db01010f24e67c0187621f",
+      "bytes": 1419
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/ErrorLog.h",
+      "sha256": "07372e9a156fc0f4a9efbb11da74b8892d785a0b003e23bb7aa00e448f00c58f",
+      "bytes": 1399
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/FloatingPoint.h",
+      "sha256": "8a2f6217e73b2daf2df40d718cba47fbcca546392815133c4b9b8b41806eefc7",
+      "bytes": 5577
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/GetNumberOfProcessorCores.cpp",
+      "sha256": "786ff2ffc410cbad2802fa56e885b23f32ad57b683960c8869c6580987f26814",
+      "bytes": 1333
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Memory.cpp",
+      "sha256": "25c81e2c65be80b2724c0e3cf6fca98502fec1b8955c4f710b932d1127c7a1ce",
+      "bytes": 2622
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Memory.h",
+      "sha256": "cc50f34cd7384cb0111ee53070681dcbe2ea7ec9fb0f590a5dfddf5990257104",
+      "bytes": 3041
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Mutex.h",
+      "sha256": "d4688fdc0e6196f9c5418d7b501e5d3dcb4bb36c0ac7fd4202f91b3888cd3698",
+      "bytes": 3506
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/NORangesSet.h",
+      "sha256": "20bc51f5135c3796a5ed6bfcd2f0c96fad000bdcdd8018c4c857631a60fa61d7",
+      "bytes": 2317
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Point.h",
+      "sha256": "9e9b5ab75c2c3da987c5b880f9c5f92f4bf2b72c1839950ee5565decb769b510",
+      "bytes": 6736
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Range.h",
+      "sha256": "c306e7cca0946fcf39dace7eecf51254cd42b77e866576266e598e3d128e2f1b",
+      "bytes": 2396
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/RawImage.cpp",
+      "sha256": "7caef2205532d783f4eeb1a44b69a3b7cae7e2537349b7d83243decae99e3b23",
+      "bytes": 16795
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/RawImage.h",
+      "sha256": "386852a0d6d18daa494d88869e05567f42f94a5df976d082995e7428ffab37a1",
+      "bytes": 11604
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/RawImageDataFloat.cpp",
+      "sha256": "3426062d35051ec85ea03db75712efdc6472306d4038f8603192db2894470fc0",
+      "bytes": 13565
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/RawImageDataU16.cpp",
+      "sha256": "2af100ed7043aaa5cdff243e448ab04a725d5183ae8fdac3065ccbcce8ce1df9",
+      "bytes": 16959
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/RawspeedException.h",
+      "sha256": "f1e8c0a5b3582cbae9f2d80b9513e7731217f6f8cc9338ce0d5154fbea1c026f",
+      "bytes": 3116
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/SimpleLUT.h",
+      "sha256": "7c195a8c8a01cbc3e5b65a423c688f4b42af78c2261e80e4d6e5d32a469b5a40",
+      "bytes": 2281
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/Spline.h",
+      "sha256": "aca8cc064e03e08e2dc452ec68af4bb75715e0b25ad7ee75e952a126c727e523",
+      "bytes": 5781
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/TableLookUp.cpp",
+      "sha256": "a649870f74fd6fd41406bc3fcb650ea06893158108d1e7d089a76b7f6008db92",
+      "bytes": 2926
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/common/TableLookUp.h",
+      "sha256": "5ed54420e6bdd7e45788a69529f3fd99452722b8bb1bb43537e761383faf8cc2",
+      "bytes": 1233
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/AbstractTiffDecoder.cpp",
+      "sha256": "88ea5115f593b7cddb05a041f3b369d152c36520ab820285a20df8f3811248eb",
+      "bytes": 1836
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/AbstractTiffDecoder.h",
+      "sha256": "5cb9953c77396c501ce8a24dff4f1c7aac3e6ce0f68aabf98c56224c1a8a1b2b",
+      "bytes": 2414
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ArwDecoder.cpp",
+      "sha256": "32407f63e2816f8709bcb06832ee198ebed1a5762bf7da20e230ace4061a4b1c",
+      "bytes": 15679
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ArwDecoder.h",
+      "sha256": "01b1d2a5b19a85b542b6f056e281b2b95be355b9a466f727271a3f32ba2af881",
+      "bytes": 2217
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/CMakeLists.txt",
+      "sha256": "276172306594852c8f2a505d93090bfc27db7f5deb8939efcdd4fcfcd5b6924a",
+      "bytes": 966
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/Cr2Decoder.cpp",
+      "sha256": "c912e4f1ffbe2f893f5a8838053d3ee73c70dedff15e7b555a4fef5414952293",
+      "bytes": 13830
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/Cr2Decoder.h",
+      "sha256": "697bb7dbc517c471f0a12c98aad56c68e4bba07038539017539e603268b7e2e6",
+      "bytes": 1914
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/CrwDecoder.cpp",
+      "sha256": "18745cf593745cce064d8a18a154fc49767d68588738361be558d9ef90ba6a85",
+      "bytes": 8968
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/CrwDecoder.h",
+      "sha256": "0387f7b0fb74845b6a8ffd96298f81cb375dd9bc241dfe05f42cfc67ef7df489",
+      "bytes": 1721
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DcrDecoder.cpp",
+      "sha256": "562233cdd495b1d089bbf660d308da67c365b984d2dc61fb5646096d4057e8ff",
+      "bytes": 4328
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DcrDecoder.h",
+      "sha256": "577a84d92a0d9ca2ee57f73545fea2ad5ed32d19616bf496247eadf5a47c301c",
+      "bytes": 1730
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DcsDecoder.cpp",
+      "sha256": "ff501855853ce01e280662a22c9ad0bdbbaa1c020a1dc317628dc7c4887297f1",
+      "bytes": 3029
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DcsDecoder.h",
+      "sha256": "cd7f5de27f12fd727f1b857217216f45cdb054254ec61d5fb1d09b12eff8f1af",
+      "bytes": 1719
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DngDecoder.cpp",
+      "sha256": "c0001567e4e2ae213f943d6189e994ad82348749b3dd4a87a3871a67cfb90881",
+      "bytes": 27725
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/DngDecoder.h",
+      "sha256": "2955ad452df838c27faf7ee8007425e5cec5bde75b96d438e7fbb1a7e068a09e",
+      "bytes": 2254
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ErfDecoder.cpp",
+      "sha256": "d2d7003b2e6ce9da08f522be4c491413a2a93f695f94bc7628aed2617869967c",
+      "bytes": 3125
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ErfDecoder.h",
+      "sha256": "43011d0d9b496b339d09f4e4ed538638483d48e5b9ce41de1889677721591604",
+      "bytes": 1730
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/IiqDecoder.cpp",
+      "sha256": "f0aad6afb5e9f42b9227e8add985b54b3f5818ad5937288080c224e143fd993f",
+      "bytes": 15899
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/IiqDecoder.h",
+      "sha256": "e0e07e2ad164c465380dcc40f47c8c43a9b394c5eb24debc8a3fb8355059904a",
+      "bytes": 2726
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/KdcDecoder.cpp",
+      "sha256": "7544da6a00431e75d1de1e3a2fbc36567dfb0e3fd0aa5b123722f625239e6637",
+      "bytes": 6164
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/KdcDecoder.h",
+      "sha256": "f2a607910ce804886990a0d86d3278d0851858f2325ded57f67a6b9b7e65bc0a",
+      "bytes": 1770
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MefDecoder.cpp",
+      "sha256": "1ee293283e5af511b9c7222ddffbc913dbbe9d2cb050d81bae5b19ddd56b6c2d",
+      "bytes": 2190
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MefDecoder.h",
+      "sha256": "094fb518fc1de564ca7ceccabafcd1c37954f6edeb64bb5fb2f04281aa2e86cd",
+      "bytes": 1729
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MosDecoder.cpp",
+      "sha256": "c1bdab3ec4cb085112c4a7c51fe456fec1d61dfe4359bb1e33270f7b35c87527",
+      "bytes": 7326
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MosDecoder.h",
+      "sha256": "d4d6d8b4e293a3e102873a2d5f2e490604ad9c1d333ec28353b79ba4ea37f8ce",
+      "bytes": 1830
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MrwDecoder.cpp",
+      "sha256": "7aff70509ca44da566ae017fd12f72d825a6637b616a8850230771cf7ea922c9",
+      "bytes": 6430
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/MrwDecoder.h",
+      "sha256": "3cd6540ea1e8c3ba20031ca968abc74f6fd3e8a20e30f2ceb7fa034ae67615cc",
+      "bytes": 1917
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/NakedDecoder.cpp",
+      "sha256": "c9582f1d59221407d73005d01c257a5026c0c1bbc0b2ef9840c15aee6c490a10",
+      "bytes": 3803
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/NakedDecoder.h",
+      "sha256": "1dd59f7dfae6c91f696f0c19479a371cff48c7ca1f3f9350c0c20ec2471d91bc",
+      "bytes": 1895
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/NefDecoder.cpp",
+      "sha256": "269f01a9907fde9a3dc9874bea01c406f29f4909f85bc228fa69f50ce38f759a",
+      "bytes": 29879
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/NefDecoder.h",
+      "sha256": "932fad9f38d4c4a659c9d5cc40b127e25f711b69cbbc3999ed3a5fe3530bba63",
+      "bytes": 2928
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/OrfDecoder.cpp",
+      "sha256": "e2694a95b07b63a9e5562979ed062c938c69c23bb9a3ad38ec408481e2395bfb",
+      "bytes": 9475
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/OrfDecoder.h",
+      "sha256": "a07a1d1aa5557f5a4bb36211ad2ddf748a3a5c6ac50f9a8acabd98f5083021fd",
+      "bytes": 1999
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/PefDecoder.cpp",
+      "sha256": "6271f9c2271e469fb3a6a7c12feef82024fb9885af482a26371bb48931c6afc2",
+      "bytes": 4802
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/PefDecoder.h",
+      "sha256": "af6b216aa7871ca37f97d4444ea6c470aaac126094d8187d65bcc1ba3ef99cdb",
+      "bytes": 1653
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/RafDecoder.cpp",
+      "sha256": "e2a7845bef2a0cb4ca023de851adf1b65c8400285a7b863f73d1dc7a9b7c8128",
+      "bytes": 12743
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/RafDecoder.h",
+      "sha256": "64d68564731791ac8f0b53c5238c36548384d29b692bc4663409c60060dfa212",
+      "bytes": 1863
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/RawDecoder.cpp",
+      "sha256": "457ddcfabba0e89d5e962dc530e58d7afc8189af3891f70fc9f2c3dfd54a2a33",
+      "bytes": 10790
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/RawDecoder.h",
+      "sha256": "8d3df01d04dfc8da051999dc3a83f9a3c43a003bca96edd003c2c3dd346c226a",
+      "bytes": 6523
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/RawDecoderException.h",
+      "sha256": "a438a5b39f85f598cdf8c97ab244f75ae62b17d44683fa8472cead01f5db8d72",
+      "bytes": 1426
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/Rw2Decoder.cpp",
+      "sha256": "820e0719a138c1d253a92036f31dee866511e61d98dd84b96d1fd8976e9f14cd",
+      "bytes": 10274
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/Rw2Decoder.h",
+      "sha256": "d02c4f48d1182b8793e8a0e51686b774e6868074b52feb2e5ff969c824778456",
+      "bytes": 1878
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/SimpleTiffDecoder.cpp",
+      "sha256": "f2cc54022354086127d19e26c59145552fcea673b08a3fedafbec246a633ca78",
+      "bytes": 2013
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/SimpleTiffDecoder.h",
+      "sha256": "b9f1185a01ff13ba051865679f28209e0f975052c8c2d72edaa756fd936df6af",
+      "bytes": 1597
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/SrwDecoder.cpp",
+      "sha256": "d9b3dc3d2684570b8df3fd22db1286315d8c8a956b91417859467e19419acfc6",
+      "bytes": 6878
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/SrwDecoder.h",
+      "sha256": "a6a829f284d98d4527b34396de2c92a2e6361fc9deb56869dab85d5bdd589c8a",
+      "bytes": 1811
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ThreefrDecoder.cpp",
+      "sha256": "05fa42991f1ec50da204e0bc2a5a3ae6d7b26fc592be55ec4d7ce42941cc7d6b",
+      "bytes": 3895
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decoders/ThreefrDecoder.h",
+      "sha256": "a2f2ab2eba8c5533de56b456ae40dad1470c3b6adc965ecbb416468b706cc99f",
+      "bytes": 1702
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractDecompressor.h",
+      "sha256": "9a7736b8dbc7e271f7d2f9a4b5d5dd266fb7dd30569ce2bef4587030a3ef3bb6",
+      "bytes": 915
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractDngDecompressor.cpp",
+      "sha256": "17e012a937bef25b67c259f127caf3cdeb6a3ff2ae429306070e4fff4b8dcc99",
+      "bytes": 7710
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractDngDecompressor.h",
+      "sha256": "4316b2370652cb4cd174173fefa273165e971c2e75a95e10a61b930aabad9a74",
+      "bytes": 4823
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractHuffmanTable.h",
+      "sha256": "e8c11312b9d46ef574ea90c0cd170728ac284add692395c69856a49e28625766",
+      "bytes": 10116
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp",
+      "sha256": "ec5913062e77b09b6e883bdc06a57c60e5924b03b906a1f13bdc08fa619f5f08",
+      "bytes": 8557
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractLJpegDecompressor.h",
+      "sha256": "34f9dcd7f05ac1d71a160cc64379f7f5f93ed7dab886ba8641a5b9795066a129",
+      "bytes": 6702
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/AbstractSamsungDecompressor.h",
+      "sha256": "b95f6b9aff6e9c30b9da8b2adecf76e380368ec32de11e67a90d8ba47e8a57da",
+      "bytes": 1206
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/BinaryHuffmanTree.h",
+      "sha256": "46b57faa5d3c22d4aef8f769f45e93f9471db16636115e5e751ad97eb72a3edc",
+      "bytes": 6936
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/CMakeLists.txt",
+      "sha256": "ce984faed0743bcef0616e8fdc6423e74234002e430d80ad60e44762f739c28b",
+      "bytes": 1618
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/Cr2Decompressor.cpp",
+      "sha256": "7f7beba33093123f47fe5011c5c1e1a4efb99ba9721ed5ae7ce05cf0f5aa93f8",
+      "bytes": 9795
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/Cr2Decompressor.h",
+      "sha256": "7ee74cbd6c219b1e8a035d0ecfcb9fbf3a7a5c6517b34500113525c3e055b388",
+      "bytes": 2483
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/CrwDecompressor.cpp",
+      "sha256": "4426b8fcfd7f840106c439e6eb3948d11bea8b0a2581a7c50606a3b1dc7b5efc",
+      "bytes": 10769
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/CrwDecompressor.h",
+      "sha256": "bf586c75cd031da5f2d78a7d6ed154b289a9d2e347d9fdf09155cc6224115d97",
+      "bytes": 2081
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/DeflateDecompressor.cpp",
+      "sha256": "6fbf7871e70a0969bd0f92ab5bd94253c73aa8fac47cac8443ed3f15e3d9ee97",
+      "bytes": 5068
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/DeflateDecompressor.h",
+      "sha256": "21d69c86050213d907a5d4eea161052e101609099a2a58e3c677c8f05daac629",
+      "bytes": 1917
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/FujiDecompressor.cpp",
+      "sha256": "cd7574f510786aca958f780529e4500a0d94111d1871c07ef4264521323fb43d",
+      "bytes": 25097
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/FujiDecompressor.h",
+      "sha256": "0861560efcb76db9fd469c0f964313f73ee63048ca52078db54f4023bb18183a",
+      "bytes": 6764
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HasselbladDecompressor.cpp",
+      "sha256": "b17dc32bc7b9d16c74f12cc0670de91530e694e9e2ce3fd2e15f111136f7031c",
+      "bytes": 4313
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HasselbladDecompressor.h",
+      "sha256": "c1c4e0539a9cc2790c709c551ce258a1361a30d796a247fe1b65188260c414f4",
+      "bytes": 1415
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HuffmanTable.h",
+      "sha256": "c98f99d0a3bea67c2891d1973677e114a65eb751caae08d84acf37d645aa4a83",
+      "bytes": 1400
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HuffmanTableLUT.h",
+      "sha256": "8f1a79acd4375c7d485a9616c947771ea28ca24e154dd3d9e03149d0a3d24b78",
+      "bytes": 8915
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HuffmanTableLookup.h",
+      "sha256": "ae0a1e7ef569d87596a1a7aa97ca690eb76307ef9610639ee70c02b52f72274b",
+      "bytes": 6807
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HuffmanTableTree.h",
+      "sha256": "77450a28e1cd34bf55d10737a4fd7b694918562d6906dbd99f142047bb9d7795",
+      "bytes": 5864
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/HuffmanTableVector.h",
+      "sha256": "d14e461ca4d6a78ecc4ddfc40ac4e8b0f2b0ac36a308694815e1c0bdb68bcb70",
+      "bytes": 5439
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/JpegDecompressor.cpp",
+      "sha256": "e9013d0da58da31da82fdb3469e8c3983d753aad5b6447666871b2c310753bb0",
+      "bytes": 5743
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/JpegDecompressor.h",
+      "sha256": "e2615147c5ca913d3b16bdf656128763b09c96e566e715b8c397001901eb6702",
+      "bytes": 1846
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/KodakDecompressor.cpp",
+      "sha256": "14d7c43f356634992a578b6538b4421227cd96dd1ec353055a491630a6616aec",
+      "bytes": 4904
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/KodakDecompressor.h",
+      "sha256": "b5f6b399237ef5f4244670061043354f8eb2261672b678a4691e8307900c5d23",
+      "bytes": 1741
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/LJpegDecompressor.cpp",
+      "sha256": "a01679ff2a030d3d45f2be83467db67196b135599c41b14e61628bdc289c011a",
+      "bytes": 8418
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/LJpegDecompressor.h",
+      "sha256": "67c356dfdaf4960a629b42fd0f2132cd0f46bec15b9e276aa559c36dcbf504e1",
+      "bytes": 1620
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/NikonDecompressor.cpp",
+      "sha256": "02166f71d6641cc397d8d78310cadfd32e77e986a3d2d7eb0565315e50c19194",
+      "bytes": 15993
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/NikonDecompressor.h",
+      "sha256": "df9c33d1923bfb9f4a0e5f57c10b353f763a1be993f35a6bf133bb4490ad0ee2",
+      "bytes": 2243
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/OlympusDecompressor.cpp",
+      "sha256": "e89f83a607bedb534a5a6fd7b2a74ff045afad614d57414dcfa3871b13a606ab",
+      "bytes": 5594
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/OlympusDecompressor.h",
+      "sha256": "30e8c8ed6d2fb1017d87c99d3ff2e9577492d1c29c0db2c3d3a2fb8fba5a0858",
+      "bytes": 2201
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV4.cpp",
+      "sha256": "97d1f7656fd673f49312c2a89a860f2aedd6f2e61a9ca4bd735ba73d65f6c4f9",
+      "bytes": 9512
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV4.h",
+      "sha256": "76149fd6401fced162d6d376c57ae39bd9f838c41b229213283bf240da5ef1e4",
+      "bytes": 3258
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV5.cpp",
+      "sha256": "213324b3e80a1f78277ad15c4d6de605ab2ecb89c641a706f8f692d560b1593a",
+      "bytes": 8996
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV5.h",
+      "sha256": "489bb9244ce3bd4f4d05ff2ce7c9dee9caa80a91b68032a0f1a1c50d048d86c5",
+      "bytes": 3961
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV6.cpp",
+      "sha256": "fc8c1d1dc1443b9ff1196c1befc24c4febbfed1cca16ba1bf80801041a1a2e9b",
+      "bytes": 7050
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PanasonicDecompressorV6.h",
+      "sha256": "0ab248b8ff0da709ffb471657fd139a4db1124f058292e6e398efb1cf75875b7",
+      "bytes": 1724
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PentaxDecompressor.cpp",
+      "sha256": "7961459c38df64bb4a3644029438a03c78a42c7e6269b01e778edc9c1341f2c0",
+      "bytes": 5318
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PentaxDecompressor.h",
+      "sha256": "07285cd3b63437c07bd5a2df65c645dee432db081b0c5be471430bcc4847b5d1",
+      "bytes": 1791
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PhaseOneDecompressor.cpp",
+      "sha256": "b23798fbe625bae330fea7f2278ba49854da10b7a94bd9b47e3f7e76b1a92a85",
+      "bytes": 6072
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/PhaseOneDecompressor.h",
+      "sha256": "daa6e8e8c8bab22d18e67b96b755289b32ccdc2c40c617f26f29e2e2972b5726",
+      "bytes": 1846
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV0Decompressor.cpp",
+      "sha256": "15ca160415124680f23fa52289169b47dbe8ce59be5338e2b0e5f46bde76ab23",
+      "bytes": 6568
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV0Decompressor.h",
+      "sha256": "c0278ec4fa6345f4c3fb21c3f4251e490209bc1e8196a6d249cb122ba3a06d82",
+      "bytes": 1760
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV1Decompressor.cpp",
+      "sha256": "3db0829167afd651fd0b99928cd0b7dc879318fca5f2ee4e86d712e336e008ec",
+      "bytes": 6035
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV1Decompressor.h",
+      "sha256": "e4cd3452494352d8b458a68dfef07275f2b8630808d3cb6efc42a637ad9d2a4e",
+      "bytes": 1665
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV2Decompressor.cpp",
+      "sha256": "9994c495b3b3bed58c0d0d38cafcea3faa96402452b93a86c7bf18e267278e74",
+      "bytes": 12582
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SamsungV2Decompressor.h",
+      "sha256": "5de329815171c37b45d31199533a38a7f24404a35b25329af8b2df568061ec24",
+      "bytes": 2436
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SonyArw1Decompressor.cpp",
+      "sha256": "e7f12bb3302ce72ba07278415087b97257114b9a714981375c5c2d688d60dc54",
+      "bytes": 2929
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SonyArw1Decompressor.h",
+      "sha256": "253c77d5aa37d2125eebdf94b052ad76020df18e7be15c9c839a150506fe3fef",
+      "bytes": 1432
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SonyArw2Decompressor.cpp",
+      "sha256": "97e04b8b06b3531302fce4a95c455160ec4100e25f98dd4b6dce1156dcceeaf8",
+      "bytes": 4893
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/SonyArw2Decompressor.h",
+      "sha256": "fdb94e09d240be107549b12226a537722e72e0621cd4413fb23886dc038ae895",
+      "bytes": 1387
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/UncompressedDecompressor.cpp",
+      "sha256": "1ead6a23d02b7cd7e48d05e6780978abc7587d2c0ec1711b14af3f6c436e7a0a",
+      "bytes": 15538
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/UncompressedDecompressor.h",
+      "sha256": "36281fe203f5e5d025c34e02b8eac7ef8236290e47d5fbca55b90407fb76794d",
+      "bytes": 5693
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/VC5Decompressor.cpp",
+      "sha256": "92aa8f76ed55e8e355dd17d44bdce0a59f61b2d09cc2853acfd9df0a2644b748",
+      "bytes": 30540
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/decompressors/VC5Decompressor.h",
+      "sha256": "18ffd32d3a74a7234311fd37fe753808eb195a8def94eb7210a97fc3415b74bf",
+      "bytes": 8072
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/interpolators/CMakeLists.txt",
+      "sha256": "6f8dc49ca035937bbdb96d642ad6e5cc42f1b6a1df4cb53ff11eb653b0d95712",
+      "bytes": 122
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/interpolators/Cr2sRawInterpolator.cpp",
+      "sha256": "2fc0ac7320fe3f6597329de4ece52c3f5ebdc3076ad4c6eaa30babb5306de4b1",
+      "bytes": 19101
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/interpolators/Cr2sRawInterpolator.h",
+      "sha256": "5a305e778f8787bc1e5de2caf5d2ec1e8b0ff3003f427648cf62ffc5e39db58b",
+      "bytes": 1849
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitPumpJPEG.h",
+      "sha256": "65fe1265b28c758c68f177c7cb72ca730348e572718a18b08489bb3cf7ddc643",
+      "bytes": 4184
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitPumpLSB.h",
+      "sha256": "75c004848e6de23cf0fc4e632e5d17834fa95ffcf3f1a7cd4cfbacbe1e4fb7a2",
+      "bytes": 1547
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitPumpMSB.h",
+      "sha256": "91c2420602c39d8d1ba492841503ebb4c235a0036a633588404e1b187a791010",
+      "bytes": 1662
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitPumpMSB16.h",
+      "sha256": "b02286dbffe58064b5927b6e2a493ec549a494e02d2ae0d918314980b1044048",
+      "bytes": 1618
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitPumpMSB32.h",
+      "sha256": "c8056e7b0bca68999775300b93a42bba230d57a977f9a603cfc78f15bd85c773",
+      "bytes": 1674
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitStream.cpp",
+      "sha256": "fd775a17b3c8dae1c0ec3ea5dc2db58c7c1c22374eceffb0e9a5544009c01d7f",
+      "bytes": 875
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/BitStream.h",
+      "sha256": "0b37f59e28597896f8fbd0aa9339d2054587992b3a7d32b55dd35d9353e69d67",
+      "bytes": 8814
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/Buffer.h",
+      "sha256": "ffc2669a3362c72b7e35b70360b05684341e5723645f511ec388863951168f59",
+      "bytes": 8007
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/ByteStream.h",
+      "sha256": "28456d7af75228c91af4e86eaaacdbc5d0985b3de2180e3266e1aeae5237be63",
+      "bytes": 6845
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/CMakeLists.txt",
+      "sha256": "a2a09a9059babc0ce27f31c4f282348d183951712266ec68ef6e2edbc33ac466",
+      "bytes": 364
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/Endianness.h",
+      "sha256": "7a310ec0f36275d5703b6765a973f9827aeee781652698d7dfc8d9f287fa073e",
+      "bytes": 4523
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileIO.h",
+      "sha256": "f210573f1353b2f0cf8155e386dfb29190bf72e4c5de8cebd08c5d9a9697b6d4",
+      "bytes": 1832
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileIOException.h",
+      "sha256": "612729e4526f42d1c4ae51a29aa6a2fc457db3c780ab3510ffaef939ac1784c9",
+      "bytes": 1484
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileReader.cpp",
+      "sha256": "0e394fd10b4a674a3973c4d7ef4c6519ad7f03a451dc3b046e0582e58958ea08",
+      "bytes": 3859
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileReader.h",
+      "sha256": "34086c3110a05a718e507eab7307900d82c65d350f759317f09b808a586b5107",
+      "bytes": 1108
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileWriter.cpp",
+      "sha256": "703fd2d9711545fa8fcf5278a622e291ca13c57c98bc6677302d308a569a28d6",
+      "bytes": 2576
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/FileWriter.h",
+      "sha256": "52519720b5f2c9c48681f8112f03b3ef09c1c724f4640895dab3a74c93ee89d0",
+      "bytes": 1228
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/io/IOException.h",
+      "sha256": "df5f15d645a400658816e04f63c458d11be8be13027ebd39beb24153df858d01",
+      "bytes": 1347
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/BlackArea.h",
+      "sha256": "c7730ab48b6bfc85acebe2a9fe28d93d4dab7fd54cf10f1064d48bb8dac940f9",
+      "bytes": 1212
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CMakeLists.txt",
+      "sha256": "9c64334e5e8b16247e3d599c4fd67ceabbfacee73db9d7c2ef354f7b36e0d6ea",
+      "bytes": 282
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/Camera.cpp",
+      "sha256": "9d867c13e00a56c94873a7d67861f2a3ecc77896333ac20b4917a3cb0f2befed",
+      "bytes": 10569
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/Camera.h",
+      "sha256": "f4ee022117063c68946cf93e580296f08b26b5f4f1798693dc1317fcafa5cee1",
+      "bytes": 3637
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CameraMetaData.cpp",
+      "sha256": "80b8f673c28e054e0632727459b3215d229bee693c01544f85117c4045b63b65",
+      "bytes": 5429
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CameraMetaData.h",
+      "sha256": "6d3a67a55bc661bf893506ef8ee5a71e189826900db154b3dadeb8b0db138616",
+      "bytes": 2696
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CameraMetadataException.h",
+      "sha256": "7de096e9ba0b7cb27cb949fd28ea7398b9c6961485d7ea59a605fb0da341a414",
+      "bytes": 1444
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CameraSensorInfo.cpp",
+      "sha256": "f3ad17ba1b51ce1bd2901bc050139bd74e29a546dc88685a35a20bffeb38a52e",
+      "bytes": 1601
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/CameraSensorInfo.h",
+      "sha256": "7c50904d426ed65d575a2ad5eb725c855292e940710e076919238f21bd72a5f3",
+      "bytes": 1329
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/ColorFilterArray.cpp",
+      "sha256": "c837b4fbb3d0ee0782050be6c3bcefbbd449420ac9aedf2dec9e7cf6ee74bd64",
+      "bytes": 6391
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/metadata/ColorFilterArray.h",
+      "sha256": "d8e8a182ec7953121595140d6ab3fede10c992a61175baab26ca84d058040454",
+      "bytes": 2324
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/CMakeLists.txt",
+      "sha256": "b6fed07b4aeb2d32cfe519f03d3dcd767f1abb087ba8a86d75bc0fce5660d5e2",
+      "bytes": 313
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/CiffParser.cpp",
+      "sha256": "2d6246f95ed5a65d35addb7e7cb231ff20f12673cde80d644f8d221cf71cadcc",
+      "bytes": 3116
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/CiffParser.h",
+      "sha256": "d99a5406ad25fba57612e5e04034683377dc8a984fd436840c44872d8c16a820",
+      "bytes": 1384
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/CiffParserException.h",
+      "sha256": "0482900a8dcb720ad286f3099c81a88deb2d91d83ee1ac8437b5dddb9e66fdfe",
+      "bytes": 1530
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/FiffParser.cpp",
+      "sha256": "b45e7cc3295c818f1d62f92ca7d038d8005dd63b466b9093f2d7b707333cd00d",
+      "bytes": 5223
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/FiffParser.h",
+      "sha256": "8eb55f9ceed84e1c690a87827393823feadd9ba901f83c1a655da5ee5da38e9a",
+      "bytes": 1334
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/FiffParserException.h",
+      "sha256": "8e5c0bf949f77699321aad7bb36d723b449ac87add736125009e7ef660266ff4",
+      "bytes": 1450
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/RawParser.cpp",
+      "sha256": "6ec54773a1c05120d5451e1e08af49d8266684cc820d3ba90a78493cb3c0bf3f",
+      "bytes": 3189
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/RawParser.h",
+      "sha256": "7b1c0f01f31ad350a7f014f2d1b41c7d929b38a15fffc3f0524c909ffc50bd2f",
+      "bytes": 1239
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/RawParserException.h",
+      "sha256": "90559928b2890c7ea355ef42f8fa6161c79378109d65d4ef3d27e403e213f266",
+      "bytes": 1384
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/TiffParser.cpp",
+      "sha256": "0863ccc03d353e1aaf4145bca3abe9081989625cd1b26e4f10c38883dc7f3750",
+      "bytes": 5634
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/TiffParser.h",
+      "sha256": "04d7989eadc1cd5fcca26a698a3bd67b705fe086393b38f6cd29385f76519a84",
+      "bytes": 2273
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/parsers/TiffParserException.h",
+      "sha256": "909e6b3447cbfa16d60af1030d1a182b25b53eb893b31f4520f1319ad3ce3285",
+      "bytes": 1489
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CMakeLists.txt",
+      "sha256": "60c76be2e56b7704db960e55ed4d2f1030e2554fc98d043021e20102f9f36cce",
+      "bytes": 224
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CiffEntry.cpp",
+      "sha256": "3887e2566618cc285f97576551a471b313d85ade30482792b61e61e29515dd54",
+      "bytes": 4791
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CiffEntry.h",
+      "sha256": "6b1f7ade05b40822b6d4c9d2f2f8cfc32046d7a718e494cff728d986eefbbc7e",
+      "bytes": 2630
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CiffIFD.cpp",
+      "sha256": "3fa9e21043c022c249fa1adcbc37984a94a6d0a02f1acd8eeb85a4772f589aa3",
+      "bytes": 9059
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CiffIFD.h",
+      "sha256": "6ab766fbd12d7c705f0998ca23f8c8967b2f6e30fba257b767da43177c465a97",
+      "bytes": 4254
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/CiffTag.h",
+      "sha256": "97caa4e208ef8965401ec1a414c2fe8897df59d05877966e5bdf9e1cbf3b8b1f",
+      "bytes": 1580
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/TiffEntry.cpp",
+      "sha256": "0553d6774928cda5ee475eaaf115ce427905fdd773dc93ebfd01818a57d2805d",
+      "bytes": 7547
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/TiffEntry.h",
+      "sha256": "b96a890be7eac071c22a0ae81887735fbc3acd1caf5481c97ffaf06049ea7d0f",
+      "bytes": 4028
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/TiffIFD.cpp",
+      "sha256": "a27940ef879fdeef4c0a2c7851665efc8a3b85f7b1f2e67530487ded677f7e96",
+      "bytes": 10438
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/TiffIFD.h",
+      "sha256": "b12167bd44661c7726d8b75d5f68cde80fec21d212d4023337c2ffd9fe52e4f5",
+      "bytes": 5557
+    },
+    {
+      "path": "RawSpeed/src/librawspeed/tiff/TiffTag.h",
+      "sha256": "6ab3d95b8260eda510e180fe023373ab3a2665d755f4c191d74e5077d72baf23",
+      "bytes": 12323
+    },
+    {
+      "path": "RawSpeed/src/utilities/CMakeLists.txt",
+      "sha256": "64792242aaa502fb9ff59bdbfc45eb827cac470ae28a6de2fd3eea378454b4de",
+      "bytes": 113
+    },
+    {
+      "path": "RawSpeed/src/utilities/identify/CMakeLists.txt",
+      "sha256": "5309520faba3beae2f3949f41147a3af380521f6a8e99d29e1a00e927b6a5a88",
+      "bytes": 746
+    },
+    {
+      "path": "RawSpeed/src/utilities/identify/rawspeed-identify.cpp",
+      "sha256": "a2f03556f10eec9ef88cba69cdb538d5282731ce611f907cda0e45a60fba8964",
+      "bytes": 10015
+    },
+    {
+      "path": "RawSpeed/src/utilities/rsbench/CMakeLists.txt",
+      "sha256": "7208e05b2a796be892bd446c36a44fecad78501101f5cc63df64db885f83fef3",
+      "bytes": 233
+    },
+    {
+      "path": "RawSpeed/src/utilities/rsbench/main.cpp",
+      "sha256": "e84efccb1cada1a7f268f4f0ec3b7c41b164baf9268dfb9a6282d83976f9a322",
+      "bytes": 7533
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/CMakeLists.txt",
+      "sha256": "a97d0e19ffbf17a6c080d005120c911c64ab8b12f1cfca6b253d101bb77612a8",
+      "bytes": 1911
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/MD5Benchmark.cpp",
+      "sha256": "87deefb83553b539c97bb871c8168f7359781de3b90d231fad881896668b2c6e",
+      "bytes": 1935
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/MD5Test.cpp",
+      "sha256": "305e6e8aa2602493dfcb91a8fe27f9b7a426fddf064cf9f6b09b31292172ec88",
+      "bytes": 3442
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/md5.cpp",
+      "sha256": "8f4c53b62155e44010979e977a3a702d8602e1197205b4d1128bffc50ae1e54b",
+      "bytes": 7265
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/md5.h",
+      "sha256": "7b881c21d9655b57bacc28a68ec1e3b51ca8de9c81c668bfef6d217bc82a53e5",
+      "bytes": 2021
+    },
+    {
+      "path": "RawSpeed/src/utilities/rstest/rstest.cpp",
+      "sha256": "23d94d9a1ed50a1207d840bb16aa0ff846855d1043c27b816a6706b5ff20c81e",
+      "bytes": 17046
+    },
+    {
+      "path": "RawSpeed/test/CMakeLists.txt",
+      "sha256": "2cfa7c43a00526c2c8ec67590c0e54071614fb76e805898f9038625d3bd2de55",
+      "bytes": 878
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/CMakeLists.txt",
+      "sha256": "e7cf39fad5d09dde6859f05f0d336b9c43c31edd7519f7554aa3952120ab3ee0",
+      "bytes": 1136
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/CMakeLists.txt",
+      "sha256": "7aa574bb04f795eddcdfb8542a7d52d416f14d18ef106f23117ec98896c9873f",
+      "bytes": 270
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/ChecksumFileTest.cpp",
+      "sha256": "dad30cc028dcfc2ba01a278ce6ca382cbd11ca3653ea50e70660b66ab221f619",
+      "bytes": 2836
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/CommonTest.cpp",
+      "sha256": "497ff82562723cf6394466cb3d91ce74dd1b7c819d836d4ac62587c95cf9af5c",
+      "bytes": 14619
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/CpuidTest.cpp",
+      "sha256": "3211159f47bc21d4ef168d9785728c0cde6d6fd058e056a9e1490b2bd2c22b72",
+      "bytes": 1475
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/MemoryTest.cpp",
+      "sha256": "3ff0c4a2eb3908c4aff9fa6949b15b44ee29084c5897b02291adfc8b69daf0ec",
+      "bytes": 7964
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/NORangesSetTest.cpp",
+      "sha256": "a85613f61f27bf9297cb7ae95673f8afffe86d74336cf690d91a5cde6f74c07a",
+      "bytes": 3497
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/PointTest.cpp",
+      "sha256": "e2be18a78630e70cf4869df75e4d4779b09e0e08d24e92e8da650ad13a6eb95d",
+      "bytes": 31257
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/RangeTest.cpp",
+      "sha256": "a4ae8cd0e07b265a67b5f2ef752bad871e7af108ffae88208518e6a8fe439bb4",
+      "bytes": 4548
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/RangeTest.h",
+      "sha256": "05054875e221d64ff8f79c039519e745546ffc114a8363de4b861f53022365d4",
+      "bytes": 5833
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/common/SplineTest.cpp",
+      "sha256": "ae2e8d315f36562717ff94a87584c9b3a8f8d0151d30e950c011c4c308d1627b",
+      "bytes": 16658
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/decompressors/AbstractHuffmanTableTest.cpp",
+      "sha256": "482182fb760c4c8eed98ebc57b73dc09b14cb972309fe0334c60a5c19a95cf20",
+      "bytes": 20147
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/decompressors/BinaryHuffmanTreeTest.cpp",
+      "sha256": "abfd378661764824018c909b669e290ae3b210760d966e395b18192c41d7010e",
+      "bytes": 8014
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/decompressors/CMakeLists.txt",
+      "sha256": "3239e3a2c3e5d8971c8d3c976cb838f3239a4e2cc4ecc3898c3bda8c1138b6e3",
+      "bytes": 198
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/decompressors/HuffmanTableTest.cpp",
+      "sha256": "c704dfa9347cbf94bbf119f06c9dc3b9e3e06dd477c6549d3d52ddb025a7a2df",
+      "bytes": 4255
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpJPEGTest.cpp",
+      "sha256": "c7f1ac0137d97e5c83c861bbf9c74e3d0df16456cb79920db2d9c780c0ca499f",
+      "bytes": 3712
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpLSBTest.cpp",
+      "sha256": "ad76a54628516f2a7d5f75e245883fb1287b54142392907362354877d15b90fd",
+      "bytes": 1912
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpMSB16Test.cpp",
+      "sha256": "a7ba3304b386faee4a8110c84adc6667fbfce239efdd674aec9031c80ebab04f",
+      "bytes": 1932
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpMSB32Test.cpp",
+      "sha256": "135b42105f0b3c7153dca35fd749b7b91c4cb941bc762232e86dbcf2dec341df",
+      "bytes": 1932
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpMSBTest.cpp",
+      "sha256": "411457fa0f04354663483c5422d5cd32219f23e29d91b055d246e5cbf482f3ae",
+      "bytes": 1912
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/BitPumpTest.h",
+      "sha256": "69f02be1122658b2b7976192ae912315a8b09bdb31273606646f7efc651328e8",
+      "bytes": 8322
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/CMakeLists.txt",
+      "sha256": "29a921a335b7f7f7adb84322ce9b2459ac2257c4e54001f5708cad7384d75892",
+      "bytes": 253
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/EndiannessTest.cpp",
+      "sha256": "2b82bdeaccf610f1387ed0aafff6bc1674ff9dbd60ded4e4386af512806c74b0",
+      "bytes": 12617
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/io/EndiannessTest.h",
+      "sha256": "491fb1a3d45efad4b6de54843f15df24bd3963c39f8e24c784f2f125ecf64b22",
+      "bytes": 25270
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/BlackAreaTest.cpp",
+      "sha256": "1e58846745b8ca9fcfabbf9e7dfeb28e879fba2916e15d06428f2fa8e5bd74ed",
+      "bytes": 5538
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/CMakeLists.txt",
+      "sha256": "7de6aec8ab278bc2b2e93a7e6f281e445e1893a43329ace421941224a2588241",
+      "bytes": 236
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/CameraMetaDataTest.cpp",
+      "sha256": "237cc9c483ea3c11ad14731be6f6b3db4ab86135bc370ebf05ddf734adf68fe4",
+      "bytes": 2969
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/CameraSensorInfoTest.cpp",
+      "sha256": "33cd6365a97a664f4f8e5315ee711540ea69cb059dcf47c9ef742cee458440ec",
+      "bytes": 10831
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/CameraTest.cpp",
+      "sha256": "23bdcca4e55572fbe9df707863e666458675bb6ac9ef6e2478c7acd05208e14b",
+      "bytes": 4306
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/metadata/ColorFilterArrayTest.cpp",
+      "sha256": "f3a54df6ffb632e2f67ed848c8120f77a855cf60bf9370d00796d589d1fa76a1",
+      "bytes": 9308
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/test/CMakeLists.txt",
+      "sha256": "027d1c125e789945aee0a61ebd534b573a2a1561d1157826052396a055fe9c4a",
+      "bytes": 253
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/test/ExceptionsTest.cpp",
+      "sha256": "061f9a40a90f47fd82c3b304d43ed50e4e2f79b9d9aac0c5d0503e21cedf904b",
+      "bytes": 6689
+    },
+    {
+      "path": "RawSpeed/test/librawspeed/test/RawSpeed.cpp",
+      "sha256": "dd47410407d482d97cd0b27f555b4a3c1b8d9cdd983f00e5b533fe6a277e79d4",
+      "bytes": 899
+    },
+    {
+      "path": "RawSpeed-CAPI/RawSpeed-API.h",
+      "sha256": "2af8e85a512bfa06d3d7016d902e82f46db02bbfb32cb73dc961d4c3e841b419",
+      "bytes": 1389
+    },
+    {
+      "path": "RawSpeed-CAPI/cameras.cpp",
+      "sha256": "4d3ec20b7e71c9cf0a6ce5a3bdb5215123548388749861ea9638346e1d8ecbae",
+      "bytes": 487980
+    },
+    {
+      "path": "RawSpeed-CAPI/rawspeed3_capi.cpp",
+      "sha256": "0bf7a0a2504e4804b6235532075bbc808dac0713cf6507ffc3d2a7d207a84057",
+      "bytes": 19398
+    },
+    {
+      "path": "RawSpeed-CAPI/rawspeed3_capi.h",
+      "sha256": "bd49284eaa8096286dea02ae81ef83da6a690ceeeb2a354416858a40f54084c5",
+      "bytes": 3520
+    },
+    {
+      "path": "RawSpeed-CAPI/rawspeed3_capi_test.cpp",
+      "sha256": "a7d92082fd509611a9b733cfc02b5b89292bd38eb851c9dafef3b596cae5d107",
+      "bytes": 7019
+    },
+    {
+      "path": "RawSpeed-CAPI/rsxml2c.sh",
+      "sha256": "76924c4177cc154a27a73622bfcfe5c09e593b3aa33f5c8b199e5b031fc49f6d",
+      "bytes": 150
+    },
+    {
+      "path": "RawSpeed-patches/01.CameraMeta-extensibility.patch",
+      "sha256": "fcbebe0d0e03ee3849fab63d5f115697fc5bcda124cdf56efe1f0de00826db0a",
+      "bytes": 370
+    },
+    {
+      "path": "RawSpeed-patches/02.Makernotes-processing.patch",
+      "sha256": "865a63f2d42adfcb0728a556ca63c4822326d445f802e614e48e382aecf5cc7f",
+      "bytes": 1768
+    },
+    {
+      "path": "RawSpeed-patches/03.remove-limits-and-logging.patch",
+      "sha256": "d7924108af23bcbd3a95cebdd29465b00172695f9a4bbf4a6de8f756af5394c4",
+      "bytes": 11406
+    },
+    {
+      "path": "RawSpeed-patches/04.clang-cl-compatibility.patch",
+      "sha256": "44646383fc16c83b7c068452968b2e73c391201a0a01053a2b924cc4250ba7f1",
+      "bytes": 1383
+    },
+    {
+      "path": "RawSpeed-patches/05.no-phase-one-correction.patch",
+      "sha256": "048db1b2ed7735bfbb136a4f42ab726566ef0f31c5706899d72535cb7fe41313",
+      "bytes": 594
+    },
+    {
+      "path": "RawSpeed-patches/06.lossless-jpeg-predictors-2-7.patch",
+      "sha256": "8905eabad408f9e547162d8acb287aaa69d9b87ff9ade7638f9fa9142d6040ff",
+      "bytes": 24032
+    },
+    {
+      "path": "RawSpeed-patches/07.bounded-dng-tile-parallelism.patch",
+      "sha256": "dbef42c5705dd314e568996b0bf3109bb8e6443be0ae42303dc356eca268f0ce",
+      "bytes": 17351
+    },
+    {
+      "path": "RawSpeed-patches/08.source-modification-notices.patch",
+      "sha256": "12a138a1b093afd732a8a10f088f8e56d529040342166cc73741f48599e3c2fe",
+      "bytes": 15094
+    },
+    {
+      "path": "build_rawspeed_ios.sh",
+      "sha256": "e498ebcef59e7e68cf980608b5c1fe0751349930a3102b35f0b4f3596133bfc6",
+      "bytes": 5534
+    },
+    {
+      "path": "licenses/BSD-3-Clause-LibRaw-DCB.txt",
+      "sha256": "0eb0872acf4378ec6fb297943c68790f94de995f60683ce2e4e3ca67cb889d78",
+      "bytes": 1721
+    },
+    {
+      "path": "licenses/BSD-3-Clause-LibRaw-X3F.txt",
+      "sha256": "77d2672e6198eecb1015849e929eeee1826ed94e884de8088f3eacdaabdde9b3",
+      "bytes": 1591
+    },
+    {
+      "path": "licenses/CC-BY-SA-3.0.txt",
+      "sha256": "3f941b3b89cf7b8370ceb83cc76d2120d471b58735d8ca60238a751a48d7f72f",
+      "bytes": 22240
+    },
+    {
+      "path": "licenses/CDDL-1.0.txt",
+      "sha256": "fde9ef48461569987d09cac803379245dfda04e7751075f39b578a0ce927d470",
+      "bytes": 16514
+    },
+    {
+      "path": "licenses/LGPL-2.1-RAWSPEED.txt",
+      "sha256": "592987e8510228d546540b84a22444bde98e48d03078d3b2eefcd889bec5ce8c",
+      "bytes": 26521
+    },
+    {
+      "path": "licenses/MIT-Adobe-DNG-LibRaw.txt",
+      "sha256": "f269ec2dca12822cdbc4384a48422640229bd56974e77046e9eea3ffdf450f91",
+      "bytes": 1472
+    },
+    {
+      "path": "licenses/MIT-PUGIXML.txt",
+      "sha256": "01e13f39d058cca09968f18d423912a18f8bf61b9161c65f8e5bcc418a8aba28",
+      "bytes": 1079
+    },
+    {
+      "path": "pugixml/pugiconfig.hpp",
+      "sha256": "797e895912fdc50e8265a99000aeebf20dd6901afdb9be8d0d9497ae14333e24",
+      "bytes": 2896
+    },
+    {
+      "path": "pugixml/pugixml.cpp",
+      "sha256": "9a9e1cf3afee5d70da7d9aa9eb1bfaba9752467f0f5e2dd8fca18cc80aeb57f9",
+      "bytes": 346827
+    },
+    {
+      "path": "pugixml/pugixml.hpp",
+      "sha256": "68ca7eac371875363257c85eea74e8e3d0a2d16e478d6685e140a9217bee36b4",
+      "bytes": 54297
+    }
+  ],
+  "app_relink_evidence": "separate_release_specific_kits"
+}

@@ -1,0 +1,628 @@
+diff --git a/src/librawspeed/common/RawImage.h b/src/librawspeed/common/RawImage.h
+index 5faa6ab0..0671167e 100644
+--- a/src/librawspeed/common/RawImage.h
++++ b/src/librawspeed/common/RawImage.h
+@@ -315,12 +315,12 @@ class RawImageCurveGuard final {
+
+ public:
+   RawImageCurveGuard(RawImage* raw, const std::vector<uint16_t>& curve_,
+-                     bool uncorrectedRawValues_)
++                     bool uncorrectedRawValues_, bool dither = true)
+       : mRaw(raw), curve(curve_), uncorrectedRawValues(uncorrectedRawValues_) {
+     if (uncorrectedRawValues)
+       return;
+
+-    (*mRaw)->setTable(curve, true);
++    (*mRaw)->setTable(curve, dither);
+   }
+
+   ~RawImageCurveGuard() {
+diff --git a/src/librawspeed/decoders/DngDecoder.cpp b/src/librawspeed/decoders/DngDecoder.cpp
+index 75a8fc77..7fd7ae3e 100644
+--- a/src/librawspeed/decoders/DngDecoder.cpp
++++ b/src/librawspeed/decoders/DngDecoder.cpp
+@@ -508,7 +508,8 @@ void DngDecoder::handleMetadata(const TiffIFD* raw) {
+       raw->getEntry(LINEARIZATIONTABLE)->count > 0) {
+     TiffEntry *lintable = raw->getEntry(LINEARIZATIONTABLE);
+     auto table = lintable->getU16Array(lintable->count);
+-    RawImageCurveGuard curveHandler(&mRaw, table, uncorrectedRawValues);
++    RawImageCurveGuard curveHandler(&mRaw, table, uncorrectedRawValues,
++                                    /*dither=*/false);
+     if (!uncorrectedRawValues)
+       mRaw->sixteenBitLookup();
+   }
+diff --git a/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp b/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp
+index 9cb62284..c1061680 100644
+--- a/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp
++++ b/src/librawspeed/decompressors/AbstractLJpegDecompressor.cpp
+@@ -190,6 +190,8 @@ void AbstractLJpegDecompressor::parseSOS(ByteStream sos) {
+
+     if (ciIndex == -1)
+       ThrowRDE("Invalid Component Selector");
++    if (ciIndex != static_cast<int>(i))
++      ThrowRDE("Unsupported SOS component selector order");
+
+     frame.compInfo[ciIndex].dcTblNo = td;
+   }
+diff --git a/src/librawspeed/decompressors/LJpegDecompressor.cpp b/src/librawspeed/decompressors/LJpegDecompressor.cpp
+index 3d16e7ca..9e0b5548 100644
+--- a/src/librawspeed/decompressors/LJpegDecompressor.cpp
++++ b/src/librawspeed/decompressors/LJpegDecompressor.cpp
+@@ -28,11 +28,32 @@
+ #include <algorithm>                      // for copy_n
+ #include <array>                          // for array
+ #include <cassert>                        // for assert
++#include <cstdint>                        // for int32_t
+
+ using std::copy_n;
+
+ namespace rawspeed {
+
++namespace {
++
++int32_t floorDivideByTwo(int32_t value) {
++  return value >= 0 ? value / 2 : -((-value + 1) / 2);
++}
++
++int32_t predict(uint32_t mode, int32_t ra, int32_t rb, int32_t rc) {
++  switch (mode) {
++  case 2: return rb;
++  case 3: return rc;
++  case 4: return ra + rb - rc;
++  case 5: return ra + floorDivideByTwo(rb - rc);
++  case 6: return rb + floorDivideByTwo(ra - rc);
++  case 7: return (ra + rb) / 2;
++  default: __builtin_unreachable();
++  }
++}
++
++} // namespace
++
+ LJpegDecompressor::LJpegDecompressor(const ByteStream& bs, const RawImage& img)
+     : AbstractLJpegDecompressor(bs, img) {
+   if (mRaw->getDataType() != TYPE_USHORT16)
+@@ -40,7 +61,8 @@ LJpegDecompressor::LJpegDecompressor(const ByteStream& bs, const RawImage& img)
+
+   if (!((mRaw->getCpp() == 1 && mRaw->getBpp() == sizeof(uint16_t)) ||
+         (mRaw->getCpp() == 2 && mRaw->getBpp() == 2 * sizeof(uint16_t)) ||
+-        (mRaw->getCpp() == 3 && mRaw->getBpp() == 3 * sizeof(uint16_t))))
++        (mRaw->getCpp() == 3 && mRaw->getBpp() == 3 * sizeof(uint16_t)) ||
++        (mRaw->getCpp() == 4 && mRaw->getBpp() == 4 * sizeof(uint16_t))))
+     ThrowRDE("Unexpected component count (%u)", mRaw->getCpp());
+
+   if (mRaw->dim.x == 0 || mRaw->dim.y == 0)
+@@ -90,7 +112,7 @@ void LJpegDecompressor::decodeScan()
+ {
+   assert(frame.cps > 0);
+
+-  if (predictorMode != 1)
++  if (predictorMode < 1 || predictorMode > 7)
+     ThrowRDE("Unsupported predictor mode: %u", predictorMode);
+
+   for (uint32_t i = 0; i < frame.cps; i++)
+@@ -119,16 +141,16 @@ void LJpegDecompressor::decodeScan()
+   if (trailingPixels == 0) {
+     switch (frame.cps) {
+     case 1:
+-      decodeN<1>();
++      predictorMode == 1 ? decodeN<1>() : decodeNWithPredictor<1>();
+       break;
+     case 2:
+-      decodeN<2>();
++      predictorMode == 1 ? decodeN<2>() : decodeNWithPredictor<2>();
+       break;
+     case 3:
+-      decodeN<3>();
++      predictorMode == 1 ? decodeN<3>() : decodeNWithPredictor<3>();
+       break;
+     case 4:
+-      decodeN<4>();
++      predictorMode == 1 ? decodeN<4>() : decodeNWithPredictor<4>();
+       break;
+     default:
+       ThrowRDE("Unsupported number of components: %u", frame.cps);
+@@ -140,13 +162,16 @@ void LJpegDecompressor::decodeScan()
+     switch (frame.cps) {
+     // Naturally can't happen for CPS=1.
+     case 2:
+-      decodeN<2, /*WeirdWidth=*/true>();
++      predictorMode == 1 ? decodeN<2, /*WeirdWidth=*/true>()
++                         : decodeNWithPredictor<2, /*WeirdWidth=*/true>();
+       break;
+     case 3:
+-      decodeN<3, /*WeirdWidth=*/true>();
++      predictorMode == 1 ? decodeN<3, /*WeirdWidth=*/true>()
++                         : decodeNWithPredictor<3, /*WeirdWidth=*/true>();
+       break;
+     case 4:
+-      decodeN<4, /*WeirdWidth=*/true>();
++      predictorMode == 1 ? decodeN<4, /*WeirdWidth=*/true>()
++                         : decodeNWithPredictor<4, /*WeirdWidth=*/true>();
+       break;
+     default:
+       ThrowRDE("Unsupported number of components: %u", frame.cps);
+@@ -233,4 +258,59 @@ template <int N_COMP, bool WeirdWidth> void LJpegDecompressor::decodeN() {
+   }
+ }
+
++template <int N_COMP, bool WeirdWidth>
++void LJpegDecompressor::decodeNWithPredictor() {
++  assert(predictorMode >= 2 && predictorMode <= 7);
++  assert(N_COMP >= mRaw->getCpp());
++
++  const CroppedArray2DRef<uint16_t> img(mRaw->getU16DataAsUncroppedArray2DRef(),
++                                        mRaw->getCpp() * offX, offY,
++                                        mRaw->getCpp() * w, h);
++  auto ht = getHuffmanTables<N_COMP>();
++  const auto initial = getInitialPredictors<N_COMP>();
++  const int32_t maximum = 2 * static_cast<int32_t>(initial[0]) - 1;
++  BitPumpJPEG bitStream(input);
++
++  const auto decodeValue = [&](unsigned row, unsigned col, int component) {
++    int32_t prediction;
++    if (row == 0 && col == 0) {
++      prediction = initial[component];
++    } else if (row == 0) {
++      prediction = img(row, col - N_COMP + component);
++    } else if (col == 0) {
++      prediction = img(row - 1, component);
++    } else {
++      const int32_t ra = img(row, col - N_COMP + component);
++      const int32_t rb = img(row - 1, col + component);
++      const int32_t rc = img(row - 1, col - N_COMP + component);
++      prediction = predict(predictorMode, ra, rb, rc);
++    }
++
++    const int32_t value = prediction + ht[component]->decodeDifference(bitStream);
++    if (value < 0 || value > maximum)
++      ThrowRDE("LJPEG sample outside valid range: %i", value);
++    return static_cast<uint16_t>(value);
++  };
++
++  for (unsigned row = 0; row < h; ++row) {
++    unsigned col = 0;
++    for (; col < N_COMP * fullBlocks; col += N_COMP)
++      for (int component = 0; component < N_COMP; ++component)
++        img(row, col + component) = decodeValue(row, col, component);
++
++    if /*constexpr*/ (WeirdWidth) {
++      unsigned component = 0;
++      for (; component < trailingPixels; ++component)
++        img(row, col + component) = decodeValue(row, col, component);
++      for (; component < N_COMP; ++component)
++        ht[component]->decodeDifference(bitStream);
++      col += N_COMP;
++    }
++
++    for (; col < N_COMP * frame.w; col += N_COMP)
++      for (int component = 0; component < N_COMP; ++component)
++        ht[component]->decodeDifference(bitStream);
++  }
++}
++
+ } // namespace rawspeed
+diff --git a/src/librawspeed/decompressors/LJpegDecompressor.h b/src/librawspeed/decompressors/LJpegDecompressor.h
+index 2dd7f254..94556ab9 100644
+--- a/src/librawspeed/decompressors/LJpegDecompressor.h
++++ b/src/librawspeed/decompressors/LJpegDecompressor.h
+@@ -34,6 +34,7 @@ class LJpegDecompressor final : public AbstractLJpegDecompressor
+ {
+   void decodeScan() override;
+   template <int N_COMP, bool WeirdWidth = false> void decodeN();
++  template <int N_COMP, bool WeirdWidth = false> void decodeNWithPredictor();
+
+   uint32_t offX = 0;
+   uint32_t offY = 0;
+diff --git a/test/librawspeed/decompressors/CMakeLists.txt b/test/librawspeed/decompressors/CMakeLists.txt
+index c4d3a0c5..a1280cc1 100644
+--- a/test/librawspeed/decompressors/CMakeLists.txt
++++ b/test/librawspeed/decompressors/CMakeLists.txt
+@@ -2,6 +2,7 @@ FILE(GLOB RAWSPEED_TEST_SOURCES
+   "AbstractHuffmanTableTest.cpp"
+   "BinaryHuffmanTreeTest.cpp"
+   "HuffmanTableTest.cpp"
++  "LJpegPredictorTest.cpp"
+ )
+
+ foreach(SRC ${RAWSPEED_TEST_SOURCES})
+diff --git a/test/librawspeed/decompressors/LJpegPredictorTest.cpp b/test/librawspeed/decompressors/LJpegPredictorTest.cpp
+new file mode 100644
+index 00000000..18408059
+--- /dev/null
++++ b/test/librawspeed/decompressors/LJpegPredictorTest.cpp
+@@ -0,0 +1,395 @@
++/*
++    RawSpeed - RAW file decoder.
++
++    This library is free software; you can redistribute it and/or modify it
++    under the terms of the GNU Lesser General Public License.
++*/
++
++#include "common/Point.h"
++#include "common/RawImage.h"
++#include "common/RawspeedException.h"
++#include "decoders/RawDecoderException.h"
++#include "decompressors/LJpegDecompressor.h"
++#include "io/Buffer.h"
++#include "io/ByteStream.h"
++#include "io/Endianness.h"
++#include <algorithm>
++#include <array>
++#include <cstdint>
++#include <cstdlib>
++#include <gtest/gtest.h>
++#include <vector>
++
++extern "C" int rawspeed_get_number_of_processor_cores() { return 1; }
++
++namespace rawspeed_test {
++namespace {
++
++constexpr int Width = 3;
++constexpr int Height = 3;
++constexpr int Components = 3;
++constexpr int Precision = 12;
++using Samples = std::array<uint16_t, Width * Height * Components>;
++
++class BitWriter final {
++  std::vector<uint8_t> bytes;
++  uint8_t byte = 0;
++  unsigned used = 0;
++
++  void emitByte(uint8_t value) {
++    bytes.push_back(value);
++    if (value == 0xff)
++      bytes.push_back(0x00);
++  }
++
++public:
++  void put(unsigned value, unsigned count) {
++    for (unsigned bit = count; bit > 0; --bit) {
++      byte = static_cast<uint8_t>((byte << 1) | ((value >> (bit - 1)) & 1U));
++      if (++used == 8) {
++        emitByte(byte);
++        byte = 0;
++        used = 0;
++      }
++    }
++  }
++
++  std::vector<uint8_t> finish() {
++    if (used != 0) {
++      byte = static_cast<uint8_t>(byte << (8 - used));
++      emitByte(byte);
++    }
++    // BitPumpJPEG refills in machine-word chunks.
++    bytes.insert(bytes.end(), 8, 0);
++    return bytes;
++  }
++};
++
++void appendU16(std::vector<uint8_t>& bytes, unsigned value) {
++  bytes.push_back(static_cast<uint8_t>(value >> 8));
++  bytes.push_back(static_cast<uint8_t>(value));
++}
++
++void appendMarker(std::vector<uint8_t>& bytes, uint8_t marker,
++                  const std::vector<uint8_t>& payload) {
++  bytes.push_back(0xff);
++  bytes.push_back(marker);
++  appendU16(bytes, payload.size() + 2);
++  bytes.insert(bytes.end(), payload.begin(), payload.end());
++}
++
++int predictor(const Samples& samples, unsigned mode, int row, int col,
++              int component) {
++  if (row == 0 && col == 0)
++    return 1 << (Precision - 1);
++  const auto at = [&](int y, int x) {
++    return static_cast<int>(samples[(y * Width + x) * Components + component]);
++  };
++  if (row == 0)
++    return at(row, col - 1); // Ra
++  if (col == 0)
++    return at(row - 1, col); // Rb
++  const int ra = at(row, col - 1);
++  const int rb = at(row - 1, col);
++  const int rc = at(row - 1, col - 1);
++  const auto floorHalf = [](int value) {
++    return value >= 0 ? value / 2 : -((-value + 1) / 2);
++  };
++  switch (mode) {
++  case 1: return ra;
++  case 2: return rb;
++  case 3: return rc;
++  case 4: return ra + rb - rc;
++  case 5: return ra + floorHalf(rb - rc);
++  case 6: return rb + floorHalf(ra - rc);
++  case 7: return (ra + rb) / 2;
++  default: std::abort();
++  }
++}
++
++void encodeDifference(BitWriter& writer, int difference) {
++  const unsigned magnitude = static_cast<unsigned>(std::abs(difference));
++  unsigned category = 0;
++  for (unsigned n = magnitude; n != 0; n >>= 1)
++    ++category;
++  ASSERT_LE(category, 16U);
++
++  // The fixture DHT contains canonical five-bit codes 0..16.
++  writer.put(category, 5);
++  if (category == 0)
++    return;
++  const unsigned bits = difference > 0
++                            ? static_cast<unsigned>(difference)
++                            : static_cast<unsigned>(difference +
++                                                    ((1 << category) - 1));
++  writer.put(bits, category);
++}
++
++std::vector<uint8_t> makeFixture(unsigned mode, const Samples& samples) {
++  std::vector<uint8_t> bytes{0xff, 0xd8}; // SOI
++
++  std::vector<uint8_t> dht{0x00};
++  dht.insert(dht.end(), 4, 0);
++  dht.push_back(17); // 17 canonical codes of length five.
++  dht.insert(dht.end(), 11, 0);
++  for (unsigned category = 0; category <= 16; ++category)
++    dht.push_back(static_cast<uint8_t>(category));
++  appendMarker(bytes, 0xc4, dht);
++
++  std::vector<uint8_t> sof{Precision, 0, Height, 0, Width, Components};
++  for (unsigned component = 1; component <= Components; ++component) {
++    sof.push_back(static_cast<uint8_t>(component));
++    sof.push_back(0x11);
++    sof.push_back(0);
++  }
++  appendMarker(bytes, 0xc3, sof);
++
++  std::vector<uint8_t> sos{Components};
++  for (unsigned component = 1; component <= Components; ++component) {
++    sos.push_back(static_cast<uint8_t>(component));
++    sos.push_back(0x00);
++  }
++  sos.push_back(static_cast<uint8_t>(mode));
++  sos.push_back(0);
++  sos.push_back(0);
++  appendMarker(bytes, 0xda, sos);
++
++  BitWriter writer;
++  for (int row = 0; row < Height; ++row) {
++    for (int col = 0; col < Width; ++col) {
++      for (int component = 0; component < Components; ++component) {
++        const auto index = (row * Width + col) * Components + component;
++        encodeDifference(writer, static_cast<int>(samples[index]) -
++                                     predictor(samples, mode, row, col,
++                                               component));
++      }
++    }
++  }
++  auto scan = writer.finish();
++  bytes.insert(bytes.end(), scan.begin(), scan.end());
++  bytes.push_back(0xff);
++  bytes.push_back(0xd9); // EOI
++  return bytes;
++}
++
++Samples decode(const std::vector<uint8_t>& fixture) {
++  const rawspeed::Buffer buffer(fixture.data(), fixture.size());
++  const rawspeed::DataBuffer data(buffer, rawspeed::Endianness::big);
++  const rawspeed::ByteStream stream(data);
++  auto image = rawspeed::RawImage::create({Width, Height},
++                                          rawspeed::TYPE_USHORT16, Components);
++  rawspeed::LJpegDecompressor decoder(stream, image);
++  decoder.decode(0, 0, Width, Height, false);
++
++  Samples decoded{};
++  const auto pixels = image->getU16DataAsUncroppedArray2DRef();
++  for (int row = 0; row < Height; ++row)
++    for (int col = 0; col < Width * Components; ++col)
++      decoded[row * Width * Components + col] = pixels(row, col);
++  return decoded;
++}
++
++std::vector<uint8_t> makeLayoutFixture(unsigned mode, int precision, int pt,
++                                       int frameWidth, int height,
++                                       int frameComponents,
++                                       const std::vector<uint16_t>& samples) {
++  const auto sampleAt = [&](int row, int col, int component) {
++    return static_cast<int>(samples[(row * frameWidth + col) *
++                                    frameComponents + component]);
++  };
++  const auto predictAt = [&](int row, int col, int component) {
++    if (row == 0 && col == 0)
++      return 1 << (precision - pt - 1);
++    if (row == 0)
++      return sampleAt(row, col - 1, component);
++    if (col == 0)
++      return sampleAt(row - 1, col, component);
++    const int ra = sampleAt(row, col - 1, component);
++    const int rb = sampleAt(row - 1, col, component);
++    const int rc = sampleAt(row - 1, col - 1, component);
++    const auto floorHalf = [](int value) {
++      return value >= 0 ? value / 2 : -((-value + 1) / 2);
++    };
++    switch (mode) {
++    case 1: return ra;
++    case 2: return rb;
++    case 3: return rc;
++    case 4: return ra + rb - rc;
++    case 5: return ra + floorHalf(rb - rc);
++    case 6: return rb + floorHalf(ra - rc);
++    case 7: return (ra + rb) / 2;
++    default: std::abort();
++    }
++  };
++
++  std::vector<uint8_t> bytes{0xff, 0xd8};
++  std::vector<uint8_t> dht{0x00};
++  dht.insert(dht.end(), 4, 0);
++  dht.push_back(17);
++  dht.insert(dht.end(), 11, 0);
++  for (unsigned category = 0; category <= 16; ++category)
++    dht.push_back(static_cast<uint8_t>(category));
++  appendMarker(bytes, 0xc4, dht);
++
++  std::vector<uint8_t> sof{static_cast<uint8_t>(precision),
++                           static_cast<uint8_t>(height >> 8),
++                           static_cast<uint8_t>(height),
++                           static_cast<uint8_t>(frameWidth >> 8),
++                           static_cast<uint8_t>(frameWidth),
++                           static_cast<uint8_t>(frameComponents)};
++  for (int component = 1; component <= frameComponents; ++component) {
++    sof.push_back(static_cast<uint8_t>(component));
++    sof.push_back(0x11);
++    sof.push_back(0);
++  }
++  appendMarker(bytes, 0xc3, sof);
++
++  std::vector<uint8_t> sos{static_cast<uint8_t>(frameComponents)};
++  for (int component = 1; component <= frameComponents; ++component) {
++    sos.push_back(static_cast<uint8_t>(component));
++    sos.push_back(0);
++  }
++  sos.push_back(static_cast<uint8_t>(mode));
++  sos.push_back(0);
++  sos.push_back(static_cast<uint8_t>(pt));
++  appendMarker(bytes, 0xda, sos);
++
++  BitWriter writer;
++  for (int row = 0; row < height; ++row)
++    for (int col = 0; col < frameWidth; ++col)
++      for (int component = 0; component < frameComponents; ++component)
++        encodeDifference(writer, sampleAt(row, col, component) -
++                                     predictAt(row, col, component));
++  auto scan = writer.finish();
++  bytes.insert(bytes.end(), scan.begin(), scan.end());
++  bytes.push_back(0xff);
++  bytes.push_back(0xd9);
++  return bytes;
++}
++
++std::vector<uint16_t> decodeLayout(const std::vector<uint8_t>& fixture,
++                                   int width, int height, int cpp) {
++  const rawspeed::Buffer buffer(fixture.data(), fixture.size());
++  const rawspeed::DataBuffer data(buffer, rawspeed::Endianness::big);
++  const rawspeed::ByteStream stream(data);
++  auto image = rawspeed::RawImage::create({width, height},
++                                          rawspeed::TYPE_USHORT16, cpp);
++  rawspeed::LJpegDecompressor decoder(stream, image);
++  decoder.decode(0, 0, width, height, false);
++  const auto pixels = image->getU16DataAsUncroppedArray2DRef();
++  std::vector<uint16_t> decoded(width * height * cpp);
++  for (int row = 0; row < height; ++row)
++    for (int col = 0; col < width * cpp; ++col)
++      decoded[row * width * cpp + col] = pixels(row, col);
++  return decoded;
++}
++
++const Samples Expected{{
++    2048, 2047, 2049, 0,    4095, 1024, 1,    4094, 1023,
++    4095, 0,    3072, 2049, 2048, 2047, 1024, 1025, 4095,
++    4094, 1,    0,    2047, 3073, 2048, 2,    4093, 4095,
++}};
++
++class LJpegPredictorTest : public testing::TestWithParam<unsigned> {};
++
++TEST_P(LJpegPredictorTest, DecodesDeterministicThreeComponentScan) {
++  EXPECT_EQ(decode(makeFixture(GetParam(), Expected)), Expected);
++}
++
++INSTANTIATE_TEST_CASE_P(AllLosslessModes, LJpegPredictorTest,
++                        testing::Values(1, 2, 3, 4, 5, 6, 7));
++
++TEST(LJpegPredictorCorruptStreamTest, RejectsTruncatedEntropyData) {
++  auto fixture = makeFixture(7, Expected);
++  const std::array<uint8_t, 2> sosMarker{0xff, 0xda};
++  const auto sos = std::search(fixture.begin(), fixture.end(),
++                               sosMarker.begin(), sosMarker.end());
++  ASSERT_NE(sos, fixture.end());
++  const size_t sosOffset = sos - fixture.begin();
++  const size_t scanOffset = sosOffset + 2 +
++      (static_cast<size_t>(fixture[sosOffset + 2]) << 8) +
++      fixture[sosOffset + 3];
++  ASSERT_LT(scanOffset + 4, fixture.size());
++  fixture.resize(scanOffset + 4);
++  EXPECT_THROW(decode(fixture), rawspeed::RawspeedException);
++}
++
++TEST(LJpegPredictorLayoutTest, DecodesOneTwoAndFourComponentScans) {
++  for (const int cpp : {1, 2, 4}) {
++    SCOPED_TRACE(testing::Message() << "cpp=" << cpp);
++    std::vector<uint16_t> samples(4 * 2 * cpp);
++    for (size_t i = 0; i < samples.size(); ++i)
++      samples[i] = static_cast<uint16_t>(900 + 17 * i);
++    try {
++      EXPECT_EQ(decodeLayout(makeLayoutFixture(7, 12, 0, 4, 2, cpp, samples),
++                             4, 2, cpp), samples) << "cpp=" << cpp;
++    } catch (const rawspeed::RawspeedException& error) {
++      FAIL() << "cpp=" << cpp << " error=" << error.what();
++    }
++  }
++}
++
++TEST(LJpegPredictorLayoutTest, ProducesPartialBlockAndDiscardsRemainder) {
++  const std::vector<uint16_t> encoded{1000, 1001, 1002, 4095};
++  const std::vector<uint16_t> expected(encoded.begin(), encoded.begin() + 3);
++  EXPECT_EQ(decodeLayout(makeLayoutFixture(7, 12, 0, 2, 1, 2, encoded),
++                         3, 1, 1), expected);
++}
++
++TEST(LJpegPredictorPointTransformTest, DecodesReducedSampleRange) {
++  const std::vector<uint16_t> samples{0, 1023, 511, 512};
++  EXPECT_EQ(decodeLayout(makeLayoutFixture(7, 12, 2, 2, 2, 1, samples),
++                         2, 2, 1), samples);
++}
++
++TEST(LJpegPredictorPointTransformTest, RejectsInvalidPrecisionAndTransform) {
++  const std::vector<uint16_t> samples{1};
++  auto fixture = makeLayoutFixture(7, 2, 0, 1, 1, 1, samples);
++  const std::array<uint8_t, 2> sosMarker{0xff, 0xda};
++  const auto sos = std::search(fixture.begin(), fixture.end(),
++                               sosMarker.begin(), sosMarker.end());
++  ASSERT_NE(sos, fixture.end());
++  const size_t sosOffset = sos - fixture.begin();
++  const size_t sosLength = (static_cast<size_t>(fixture[sosOffset + 2]) << 8) |
++                           fixture[sosOffset + 3];
++  fixture[sosOffset + 2 + sosLength - 1] = 2;
++  EXPECT_THROW(decodeLayout(fixture, 1, 1, 1),
++               rawspeed::RawDecoderException);
++}
++
++TEST(LJpegPredictorRangeTest, RejectsReconstructedSampleAbovePrecision) {
++  const std::vector<uint16_t> samples{4096};
++  EXPECT_THROW(decodeLayout(makeLayoutFixture(7, 12, 0, 1, 1, 1, samples),
++                            1, 1, 1), rawspeed::RawDecoderException);
++}
++
++TEST(LJpegPredictorMarkerOrderTest, RejectsSosBeforeSof) {
++  auto fixture = makeFixture(7, Expected);
++  const std::array<uint8_t, 2> sofMarker{0xff, 0xc3};
++  const std::array<uint8_t, 2> sosMarker{0xff, 0xda};
++  const auto sof = std::search(fixture.begin(), fixture.end(),
++                               sofMarker.begin(), sofMarker.end());
++  const auto sos = std::search(fixture.begin(), fixture.end(),
++                               sosMarker.begin(), sosMarker.end());
++  ASSERT_NE(sof, fixture.end());
++  ASSERT_NE(sos, fixture.end());
++  std::iter_swap(sof + 1, sos + 1);
++  EXPECT_THROW(decode(fixture), rawspeed::RawDecoderException);
++}
++
++TEST(LJpegPredictorComponentOrderTest, RejectsReorderedSosSelectors) {
++  auto fixture = makeFixture(7, Expected);
++  const std::array<uint8_t, 2> sosMarker{0xff, 0xda};
++  const auto sos = std::search(fixture.begin(), fixture.end(),
++                               sosMarker.begin(), sosMarker.end());
++  ASSERT_NE(sos, fixture.end());
++  const size_t sosOffset = sos - fixture.begin();
++  ASSERT_EQ(fixture[sosOffset + 4], Components);
++  fixture[sosOffset + 5] = 3;
++  fixture[sosOffset + 7] = 2;
++  fixture[sosOffset + 9] = 1;
++  EXPECT_THROW(decode(fixture), rawspeed::RawDecoderException);
++}
++
++} // namespace
++} // namespace rawspeed_test
