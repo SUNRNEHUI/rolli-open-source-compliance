@@ -14,6 +14,22 @@
       "bytes": 17553825,
       "object_count": 278,
       "device_execution_verified": false
+    },
+    {
+      "kind": "current-unreleased-snapshot",
+      "snapshot_id": "current-unreleased-link-snapshot-827aad35ff2a368f",
+      "app_version_fields": {
+        "version": "1.9.31",
+        "build": "62"
+      },
+      "platform": "iphoneos-arm64",
+      "release_tag": "current-unreleased-20261023",
+      "file": "rolli-current-unreleased-20261023-iphoneos-arm64-relink.tar.gz",
+      "sha256": "6541f7e1dd22809ef9b69c065d8c133f7ee751df178184fa8753725e86ff404d",
+      "bytes": 17400340,
+      "object_count": 276,
+      "archive_executable_sha256": "16c55bb01f76325553d5a23758b15312ebbbea5182f677225849d7886333365c",
+      "device_execution_verified": false
     }
   ]
 }

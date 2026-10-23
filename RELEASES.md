@@ -13,9 +13,19 @@ The application objects were reconstructed from retained release inputs; origina
 
 Baseline relinking with the historical libraries matches the original release's imports, exports and all 56 dynamic-library dependencies after its executable stripping step. Relinking with the supplied source-built pair and a modified-library probe also passed. The source-built pair changes three libc++ imports in place of two historical imports; this measured difference is documented in the kit. Device execution and runtime equivalence have not been verified.
 
-## Current development snapshot
+## Current development snapshot — 2026-10-23, unreleased
 
-The current unreleased snapshot is still undergoing final archive and relinking validation. No kit for that snapshot is published by this entry. Its application version fields may still show 1.9.31 (62); it must not be confused with the distributed build above. A separate snapshot entry will identify it when validation is complete.
+- Snapshot: `current-unreleased-link-snapshot-827aad35ff2a368f`.
+- [Download the snapshot kit and checksum](https://github.com/SUNRNEHUI/rolli-open-source-compliance/releases/tag/current-unreleased-20261023)
+- File: `rolli-current-unreleased-20261023-iphoneos-arm64-relink.tar.gz`
+- SHA-256: `6541f7e1dd22809ef9b69c065d8c133f7ee751df178184fa8753725e86ff404d`
+- Size: 17,400,340 bytes; 276 arm64 iPhoneOS application link objects.
+- [Corresponding component source](components/raw-2026-10-23/README.md), using the same component manifest identified above.
+- Unsigned archive executable SHA-256: `16c55bb01f76325553d5a23758b15312ebbbea5182f677225849d7886333365c`.
+
+This is a development snapshot, not a new distributed app build. Its version fields still read 1.9.31 (62); it must not be confused with the earlier distributed build. The final unsigned archive succeeded. The captured full link-object set passed baseline, source-built replacement, modified-library probe, and relocated-directory relinking. The baseline matches the archive's external imports, dynamic-library dependencies, and exports after distribution stripping. Production decoding libraries were not changed. Public rebuilt libraries are separately identified in the kit.
+
+Verification also checked all 14 bundled legal documents, the decoded pixels of the 12 updated light-leak images, and the retained Star resources. Focused simulator cache regression tests passed (6 passed, 1 existing RAW-fixture-dependent test skipped, no failures). These checks do not establish physical-device execution or runtime equivalence of a modified RawSpeed library.
 
 ## Other builds
 
