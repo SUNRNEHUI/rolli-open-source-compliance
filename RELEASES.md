@@ -27,6 +27,16 @@ This is a development snapshot, not a new distributed app build. Its version fie
 
 Verification also checked all 14 bundled legal documents, the decoded pixels of the 12 updated light-leak images, and the retained Star resources. Focused simulator cache regression tests passed (6 passed, 1 existing RAW-fixture-dependent test skipped, no failures). These checks do not establish physical-device execution or runtime equivalence of a modified RawSpeed library.
 
+## 1.9.38 (76), signed archive objects — 2026-11-04
+
+- Request the retained relinking kit by email at [xihuan666sun@gmail.com](mailto:xihuan666sun@gmail.com). It is **on request** and is not a public download. [GitHub Issues](https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new) is an alternate channel.
+- File: `rolli-1.9.38-76-iphoneos-arm64-relink.tar.gz`; SHA-256: `8d9c84dcbfd7d566559d0526adc798dd38c40cf53cebe05155a5a71ec8b94889`; size: 19,131,570 bytes.
+- 305 arm64 iPhoneOS application objects captured from the signed build 76 archive at source commit `6a60cdbf7497d79e78b474cdfbd4cdb1e0de93be`.
+- [Corresponding LibRaw source delta](components/raw-2026-11-04-delta/README.md), based on the existing component source package. Delta manifest SHA-256: `bb2b86d0fd6143cd52ba6adf005e48b79de4e1898ceefd53ffc73de1a5699b7c`.
+- Source-built RawSpeed pair provenance: public source commit `fa748ef9d83d56691c0ae0c5ae9a67f90bf706b3`.
+
+The retained kit passed original-library baseline, sanitized source-built-library, and modified-library probe relinking. Both RawSpeed archives contributed loaded members to the final links. Platform, minimum iOS version, and dynamic-library dependency sets matched the signed archive. The relinked executables are unsigned; this validation does not claim that they were installed or executed on a device. The kit contains application objects and is **not** uploaded to this public repository.
+
 ## Other builds
 
 Request materials by email at [xihuan666sun@gmail.com](mailto:xihuan666sun@gmail.com), or through [GitHub Issues](https://github.com/SUNRNEHUI/rolli-open-source-compliance/issues/new) if email is unavailable. Include the version, build number, platform and approximate distribution date. An absent index entry does not cancel an earlier written offer.

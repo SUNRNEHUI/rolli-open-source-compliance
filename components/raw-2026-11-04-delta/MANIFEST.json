@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "base_component_package": "https://github.com/SUNRNEHUI/rolli-open-source-compliance/tree/fa748ef9d83d56691c0ae0c5ae9a67f90bf706b3/components/raw-2026-10-23",
+  "base_repository_commit": "fa748ef9d83d56691c0ae0c5ae9a67f90bf706b3",
+  "base_manifest_sha256": "b7d8d580db7005d7e9b4e249f31b40e4ae00664dc81f1f503857c382eab5825b",
+  "base_manifest_files": 457,
+  "unchanged_vendor_source_files": 99,
+  "package_notice_only_source_files": [
+    "LibRaw/src/decoders/unpack.cpp",
+    "LibRaw/src/demosaic/aahd_demosaic.cpp",
+    "LibRaw/src/postprocessing/dcraw_process.cpp",
+    "RawSpeed-CAPI/rawspeed3_capi.cpp",
+    "RawSpeed-CAPI/rawspeed3_capi.h",
+    "RawSpeed-CAPI/rawspeed3_capi_test.cpp"
+  ],
+  "replacement_files": [
+    {
+      "path": "LibRaw/src/demosaic/ahd_demosaic.cpp",
+      "old_public_sha256": "5445b43a06543f2117cc3a0123e14c7b136cdc7fd92dc64d9af63671a66a6688",
+      "app_source_sha256": "a5c958cc7d646ea1edd73bf5987f0805fee5e2a06bc007b775a6932a4e4ec04c",
+      "replacement_sha256": "556a461b87c5e094b99ed69b4fa4aa852bdd60f456b79aa14de8a21bda018149",
+      "modification_notice_date": "2026-10-28"
+    },
+    {
+      "path": "LibRaw/src/postprocessing/mem_image.cpp",
+      "old_public_sha256": "0bbf23cda1101c11a4cc9cc5da31230fa7d0f8c6f00ac196489386fd66c0b54c",
+      "app_source_sha256": "c2b4e21684bc58284ddbcd5a4045a04b3b29b523e86404c3f6b6552043aedc71",
+      "replacement_sha256": "e519396a6b5b926bdf0f4bc4babf64a90908f7bbb731ed779ab4736eff1d637b",
+      "modification_notice_date": "2026-10-28"
+    }
+  ],
+  "patch_file": "libraw-2026-10-28.patch",
+  "patch_sha256": "5deb6dba25c9b875d3a7f9d93478d46c6452ffd467cfb915dd6998d60941f269",
+  "verification": "old public hashes, all local vendor source differences, and patch output checked"
+}

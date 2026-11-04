@@ -32,6 +32,22 @@
       "archive_executable_sha256": "16c55bb01f76325553d5a23758b15312ebbbea5182f677225849d7886333365c",
       "device_execution_verified": false,
       "availability": "on-request"
+    },
+    {
+      "app_version": "1.9.38",
+      "app_build": "76",
+      "kind": "signed-archive-exact-objects",
+      "platform": "iphoneos-arm64",
+      "app_source_commit": "6a60cdbf7497d79e78b474cdfbd4cdb1e0de93be",
+      "component_source_delta": "components/raw-2026-11-04-delta",
+      "component_delta_manifest_sha256": "bb2b86d0fd6143cd52ba6adf005e48b79de4e1898ceefd53ffc73de1a5699b7c",
+      "file": "rolli-1.9.38-76-iphoneos-arm64-relink.tar.gz",
+      "sha256": "8d9c84dcbfd7d566559d0526adc798dd38c40cf53cebe05155a5a71ec8b94889",
+      "bytes": 19131570,
+      "object_count": 305,
+      "signed_archive_executable_sha256": "7ef8b13050a2475ce54f91c2dfe018d1997d37fe1b2cf16032336f0150245a2e",
+      "device_execution_verified": false,
+      "availability": "on-request"
     }
   ],
   "materials_request": {
